@@ -20,6 +20,7 @@
 		public $cBirthDay;
 		public $cMail;
 		public $cPhone;
+		public $cVersion;
 		
 		public $vReturnCode;
 		public $vErrMessage;
