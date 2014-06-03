@@ -1,48 +1,46 @@
 <!--- Domänenspezifische Daten, kein HTML Bezug !--->
 
-<?php
+<?php		
+	//Globale für Sortierung und Richtung
+	$gOrderBy  = "cName";
+	$gOrderDir = "ASC";
 		
 	class KontaktService 
-	{
-		const errC 		 		= "ERROR";
-		const errConnect 		= "Connect";
-		const NOT_FOUND 		= "NOT_FOUND";
-		const INVALID_INPUT 	= "INVALID_INPUT";
-		const OK				= "OK";
-		const VERSION_OUTDATED 	= "VERSION_OUTDATED";
-		
-		public function readKontakt($request)
-		{						
-			$id=$request["id"];
-			//var_dump ($id);
+	{	
+		public function readKontakt($id)
+		{	
+			$retC = ErrIds::cOK;
+			$Result = array(); 
+			$Result[0] = $retC;
 						
 			// Fetch weist die Attribute anhand des Spaltennamens zu
-			$Kontakt = new Kontakt();
-						
-			switch ($id)
-			{
+			switch ($id) {
 			case 1:
-				$Kontakt->cId = $id;
-				$Kontakt->cVersion = 5;
-				$Kontakt->cVName = "Hans";
-				$Kontakt->cNName = "Zimmer";
+				$Result[1] = new Kontakt();
+				$Result[1]->cId = $id;
+				$Result[1]->cVersion = 5;
+				$Result[1]->cVName = "Hans";
+				$Result[1]->cNName = "Zimmer";
 				break;
 				
 			case 2:
-				$Kontakt->cId = $id;
-				$Kontakt->cVersion = 2;
-				$Kontakt->cVName = "James";
-				$Kontakt->cNName = "Horner";
+				$Result[1] = new Kontakt();
+				$Result[1]->cId = $id;
+				$Result[1]->cVersion = 2;
+				$Result[1]->cVName = "James";
+				$Result[1]->cNName = "Horner";
 				break;
-			}
-									
-			if ($Kontakt === NULL or $Kontakt->cId === NULL)
+			}			
+			
+			if ($Result[1] === NULL or $Result[1]->cId === NULL)
 			{
-				return self::NOT_FOUND;
+				$Result[0] = errIds::cErrRecordNotFound;
+				//echo " ERROR " . $Result[0] . " ERROR ";
+				//return $Result[0] = errIds::cErrRecordNotFound;
 			}
-		
-			unset($Kontakt->id);
-			return $Kontakt;
+
+			unset($Result[1]->id);
+			return $Result;
 			
 		}
 		

@@ -4,28 +4,59 @@
 	
 	class GetKontaktCommand 
 	{
-		public function execute($request)
+		public function execute($request,$requestHeaders)
 		{
-			if (isset($request["id"]) == FALSE)
+			//Initialisieren
+			$retC = ErrIds::cOK;
+			$Result = array(); 
+			$Result[0] = $retC;						
+			$id = 0;
+			
+			// Formale Prüfung der Request ID
+			// Vorhanden? Nur Zahlenwert? etc.
+			if (isset($request["id"])) {
+			
+				if  (is_numeric($request["id"]))
+				{
+					$Id  = $request["id"];
+				} 
+				else 
+				{
+					$Result[0] = errIds::cErrWrongParameter;
+				}
+			} 
+			else 
 			{
-				header("HTTP/1.1 400");
-				return;
+				$Result[0] = errIds::cErrWrongParameter;
+			}				
+			
+			// Kein Fehler bis hier hin? -> Verarbeitung starten
+			if ($Result[0] == errIds::cOK) 
+			{
+				$Kontakt_service = new KontaktService();
+				$Result = $Kontakt_service->readKontakt($Id);
+				
+				if ($Result[0] == errIds::cOK)
+				{
+					return $Result;
+				}
+				//$dbRec->url = "/TeamProject/Service/contact/$dbRec->cId";
+				//	unset($dbRec->cId);
+				//	header("Etag: $dbRec->cVersion");
+				//	unset($dbRec->cVersion);
+				//}
+			
+				//if ($Kontakt == KontaktService::NOT_FOUND) 
+				//{
+				//	header("HTTP/1.1 404");
+				//	return;
+				//}
+			
 			}
 			
-			$Kontakt_service = new KontaktService();
-			$Kontakt = $Kontakt_service->readKontakt($request);
-			
-			if ($Kontakt == KontaktService::NOT_FOUND) 
-			{
-				header("HTTP/1.1 404");
-				return;
-			}
-			
-			header("Etag: $Kontakt->cVersion");
-			
-			//var_dump ($request);			
-						
-			return $Kontakt;	
+			// header("Etag: $Kontakt->cVersion");
+				
+			return $Result;	
 		}
 		
 	}
