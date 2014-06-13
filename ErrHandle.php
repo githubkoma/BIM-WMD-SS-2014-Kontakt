@@ -47,7 +47,7 @@
 					 header("HTTP/1.1 400");
 					 break;
 				case ErrIds::cErrDBConnect:
-					 $ErrMessage = "Connect failed: " . $link->connect_error . ": " . $link->connect_errno;
+					 $ErrMessage = "Connect failed: " . $db->$link->connect_error . ": " . $db->$link->connect_errno;
 					 break;
 				case ErrIds::cErrDBClose:
 					 $ErrMessage = "Close failed: " . $errCode;

@@ -9,6 +9,7 @@ http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/RequestHandler.php?command=GetKo
 	require "KontaktService.php";
 	require "ErrHandle.php";
 	require "ErrIds.php";
+	require "DBCommand.php";
 	require "GetKontaktCommand.php";	
 	#require "CreateKontaktCommand.php";
 	#require "CreateKontaktResult.php";
@@ -22,16 +23,16 @@ http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/RequestHandler.php?command=GetKo
 	
 	class RequestHandler 
 	{
+		// Result-Array erzeugen, um Rückgabewerte zu strukturieren: 
+		// Index [0] = Enthält Return-Code, siehe ErrIds
+		// Index [1] = Enthält Ergebnis-Objekt bei jeglichen Aufrufen
+		private $Result = array();	
+	
 		public function handleRequest()
 		{			
 			// Error-Handler initialisieren, mit 'OK' starten
-			$errObj = new ErrHandle();		
-			$retC   = ErrIds::cOK;
-			// Result-Array erzeugen, um Rückgabewerte zu strukturieren: 
-			// Index [0] = Enthält Return-Code, siehe ErrIds
-			// Index [1] = Enthält Ergebnis-Objekt, zur Client-Ausgabe
-			$Result = array(); 
-			$Result[0] = $retC;						
+			$errObj = new ErrHandle();
+			$Result[0] = ErrIds::cOK;				
 
 			// Globale REQUEST Variable übernehmen
 			$request = $_REQUEST;			

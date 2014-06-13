@@ -4,34 +4,31 @@
 	//Globale für Sortierung und Richtung
 	$gOrderBy  = "cName";
 	$gOrderDir = "ASC";
-		
+	
 	class KontaktService 
-	{	
+	{		
+		private $Result = array();	
+	
 		public function readKontakt($id)
 		{	
-			$retC = ErrIds::cOK;
-			$Result = array(); 
-			$Result[0] = $retC;
-						
-			// Fetch weist die Attribute anhand des Spaltennamens zu
-			switch ($id) {
-			case 1:
-				$Result[1] = new Kontakt();
-				$Result[1]->cId = $id;
-				$Result[1]->cVersion = 5;
-				$Result[1]->cVName = "Hans";
-				$Result[1]->cNName = "Zimmer";
-				break;
-				
-			case 2:
-				$Result[1] = new Kontakt();
-				$Result[1]->cId = $id;
-				$Result[1]->cVersion = 2;
-				$Result[1]->cVName = "James";
-				$Result[1]->cNName = "Horner";
-				break;
-			}			
+			$Result[0] = ErrIds::cOK;
 			
+			$objDB = new DBCommand();
+			$Result = $objDB->dbConnect();
+			
+			if ($Result[0] == ErrIds::cOK)
+			{
+				$sqlState = "SELECT cId, cCrtDate, cCrtUser, cUpdtDate, " . 
+				"cUpdtUser, cName, cBirthDay, cCity, " . 
+				"cMail, cNotes " . // !!! cVersion !!!
+				"FROM ".  $objDB->gTable . " " .
+				"WHERE cId = " . $id . ";";
+				
+				$Result = $objDB->dbQuery($sqlState);
+			
+			}
+		
+			// Keinen Datensatz zurückbekommen?
 			if ($Result[1] === NULL or $Result[1]->cId === NULL)
 			{
 				$Result[0] = errIds::cErrRecordNotFound;

@@ -4,12 +4,12 @@
 	
 	class GetKontaktCommand 
 	{
+		private $Result = array();	
+	
 		public function execute($request,$requestHeaders)
 		{
 			//Initialisieren
-			$retC = ErrIds::cOK;
-			$Result = array(); 
-			$Result[0] = $retC;						
+			$Result[0] = ErrIds::cOK;				
 			$id = 0;
 			
 			// Formale Prüfung der Request ID
