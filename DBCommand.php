@@ -3,7 +3,7 @@
 	class DBCommand
 	{		
 		public $gDbName		= "cmdb";
-		public $gTable 		= "contacts";
+		public $gTable 		= "kontakt";
 		private $gHost	 	= "localhost";
 		private $gUser		= "root";
 		private $gPassW 	= "";	

@@ -10,7 +10,7 @@
 		public function getError($errCode)
 		{
 			global $link;
-			
+		
 			switch ($errCode)
 			{
 				case ErrIds::cNOK:
@@ -21,7 +21,7 @@
 					 break;	
 				case ErrIds::cErrRecordNotFound:
 					 $ErrMessage = "RecordNotFound: " . $errCode;
-					 header("HTTP/1.1 404");
+					 //header("HTTP/1.1 404");
 					 break;
 				case ErrIds::cErrWrongData:
 					 $ErrMessage = "Wrong or missing Data: " . $errCode;
@@ -40,14 +40,13 @@
 					 break;
 				case ErrIds::cErrUndefClass:
 					 $ErrMessage = "Undefined Class: " . $errCode;
-					 header("HTTP/1.1 400");
 					 break;
-				case ErrIds::cErrWrongParameter:
-					 $ErrMessage = "Wrong Parameter: " . $errCode;
-					 header("HTTP/1.1 400");
+				case ErrIds::cErrWrongParamter:
+					 $ErrMessage = "Wrong Paramter: " . $errCode;
+					 //header("HTTP/1.1 400");
 					 break;
 				case ErrIds::cErrDBConnect:
-					 $ErrMessage = "Connect failed: " . $db->$link->connect_error . ": " . $db->$link->connect_errno;
+					 $ErrMessage = "Connect failed: " . $link->connect_error . ": " . $link->connect_errno;
 					 break;
 				case ErrIds::cErrDBClose:
 					 $ErrMessage = "Close failed: " . $errCode;
