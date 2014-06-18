@@ -10,7 +10,7 @@
 		private $gLink;
 		
 		private $Result = array();		
-				
+		
 		function __construct() 
 		{			
 			//$Result[0] =  ErrIds::cOK;
@@ -40,73 +40,46 @@
 		
 		public function dbClose()
 		{
-			global $gLink;
+			$Result[0] =  ErrIds::cOK;
 			
-			$retC = $gLink->close();
-			if ($retC == FALSE)
+			$Result[1] = $this->gLink->close();
+			if ($Result[1] == FALSE)
 			{
-				return ErrIds::cErrClose;
+				$Result[0] = ErrIds::cErrClose;
 			}
-			return ErrIds::cOK;
+			return $Result;
 		}	
-		
-		public function dbCharSet()
-		{
-			global $gLink;
-			
-			$retC = $gLink->set_charset("utf8");
-			if ($retC === FALSE)
-			{
-				return ErrIds::cErrDBCharset;
-			}
-			return ErrIds::cOK;
-		}
-		
+	
 		public function dbQuery($sqlState)
 		{
 			$Result[0] =  ErrIds::cOK;
 		
 			// Rückgabewert aus mysqli::query ist eine Klasse
-			$queryResult = $this->gLink->query($sqlState);		
-			if  ($queryResult === FALSE)
+			$Result[1] = $this->gLink->query($sqlState);		
+			if  ($Result[1] === FALSE)
 			{
 				$Result[0] = ErrIds::cErrDBQuery;
 			}
-			else
-			{
-				$fetchResult = $queryResult->fetch_object();		
-			
-				switch ($fetchResult) {
-				case FALSE:
-					$Result[0] = ErrIds::cErrDBFetch;
-					break;
-					
-				case FALSE:
-					$Result[0] = ErrIds::cErrDBFetch;
-					break;
-					
-				default:
-					$Result[1] = $fetchResult;				
-				}				
-				
-			}			
-			
+
 			return $Result;
 		}
 		
-		public function dbFetch($resSet,&$dbRec,$tab)
+		public function dbFetch($query)
 		{
+			$Result[0] =  ErrIds::cOK;
 
-			$dbRec     = $resSet->fetch_object($tab);		
-			if  ($dbRec === FALSE)
-			{
-				return ErrIds::cErrDBFetch;
-			} else if ($dbRec == NULL)
-				{
-					return ErrIds::cErrRecordNotFound;
-				}
-			
-			return ErrIds::cOK;
+			// Fetch: Datensatz Lesen und Zeiger vorwärts setzen
+			$Result[1] = $query->fetch_object("kontakt");
+				
+			switch ($Result[1]) {
+			case FALSE:
+				$Result[0] = ErrIds::cErrRecordNotFound;
+				break;
+			case NULL:
+				$Result[0] = ErrIds::cErrDBFetch;
+				break;
+			}				
+			return $Result;
 		}
 		
 		public function dbFetchRow($resSet,&$dbRec)

@@ -33,13 +33,13 @@
 			// Kein Fehler bis hier hin? -> Verarbeitung starten
 			if ($Result[0] == errIds::cOK) 
 			{
-				$Kontakt_service = new KontaktService();
-				$Result = $Kontakt_service->readKontakt($Id);
+				$objKontaktService = new KontaktService();
+				$Result = $objKontaktService->readKontakt($Id);
 				
-				if ($Result[0] == errIds::cOK)
-				{
-					return $Result;
-				}
+				//if ($Result[0] == errIds::cOK)
+				//{
+				//	return $Result;
+				//}
 				//$dbRec->url = "/TeamProject/Service/contact/$dbRec->cId";
 				//	unset($dbRec->cId);
 				//	header("Etag: $dbRec->cVersion");

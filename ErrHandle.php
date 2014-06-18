@@ -41,9 +41,9 @@
 				case ErrIds::cErrUndefClass:
 					 $ErrMessage = "Undefined Class: " . $errCode;
 					 break;
-				case ErrIds::cErrWrongParamter:
-					 $ErrMessage = "Wrong Paramter: " . $errCode;
-					 //header("HTTP/1.1 400");
+				case ErrIds::cErrWrongParameter:
+					 $ErrMessage = "Wrong Parameter: " . $errCode;
+					 header("HTTP/1.1 400");
 					 break;
 				case ErrIds::cErrDBConnect:
 					 $ErrMessage = "Connect failed: " . $link->connect_error . ": " . $link->connect_errno;

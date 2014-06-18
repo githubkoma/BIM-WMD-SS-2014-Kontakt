@@ -13,27 +13,27 @@
 		{	
 			$Result[0] = ErrIds::cOK;
 			
-			$objDB = new DBCommand();
-			$Result = $objDB->dbConnect();
+			$objDBcommand = new DBCommand();
+			$Result = $objDBcommand->dbConnect();
 			
 			if ($Result[0] == ErrIds::cOK)
-			{
+			{							
 				$sqlState = "SELECT cId, cCrtDate, cCrtUser, cUpdtDate, " . 
-				"cUpdtUser, cName, cBirthDay, cCity, " . 
-				"cMail, cNotes " . // !!! cVersion !!!
-				"FROM ".  $objDB->gTable . " " .
+				"cUpdtUser, cNName, cVName, cBirthDay, cCity, " . 
+				"cMail, cPhone, cVersion " .
+				"FROM ".  $objDBcommand->gTable . " " .
 				"WHERE cId = " . $id . ";";
 				
-				$Result = $objDB->dbQuery($sqlState);
-			
-			}
-		
-			// Keinen Datensatz zurückbekommen?
-			if ($Result[1] === NULL or $Result[1]->cId === NULL)
-			{
-				$Result[0] = errIds::cErrRecordNotFound;
-				//echo " ERROR " . $Result[0] . " ERROR ";
-				//return $Result[0] = errIds::cErrRecordNotFound;
+				// SQL Absetzen, Falls OK: Ergebnis auswerten
+				$Result = $objDBcommand->dbQuery($sqlState);
+				if ($Result[0] == ErrIds::cOK)
+				{
+					// Kontaktobjekt als Ergebnis fetchen
+					$queryOnly = $Result[1];
+					$Result = $objDBcommand->dbFetch($queryOnly);	
+
+				}				
+				$objDBcommand->dbClose();				
 			}
 
 			unset($Result[1]->id);
@@ -41,9 +41,48 @@
 			
 		}
 		
-		public function readKontakte()
+		public function readKontakte($sqlLimitFrom, $sqlLimitTo, 
+										$sqlOrderBy,$sqlOrderDir)
 		{
+			$Result[0] = ErrIds::cOK;
 			
+			$objDBcommand = new DBCommand();
+			$Result = $objDBcommand->dbConnect();
+			
+			if ($Result[0] == ErrIds::cOK)
+			{							
+				$sqlState = "SELECT cId, cCrtDate, cCrtUser, cUpdtDate, " . 
+				"cUpdtUser, cNName, cVName, cBirthDay, cCity, " . 
+				"cMail, cPhone, cVersion " .
+				"FROM ".  $objDBcommand->gTable . " " .
+				"ORDER BY " . $sqlOrderBy . " " . $sqlOrderDir . " " .
+				"LIMIT " . $sqlLimitFrom . " , " . $sqlLimitTo . ";";
+			
+				$Result = $objDBcommand->dbQuery($sqlState);
+				if ($Result[0] == ErrIds::cOK)
+				{
+					$queryOnly = $Result[1];
+
+					$Result = $objDBcommand->dbFetch($queryOnly);	
+					if ($Result[0] == ErrIds::cOK)
+					{
+					// Erstes Ergebnis des FETCH unverändert lassen, da auch
+					// nur ein einziger positiv zurückgegebener Datensatz
+					// ein gültiges Ergebnis ist. Daher weiter in Temp-Variable.
+						$loopResult = $Result;
+						while (($loopResult[0] == ErrIds::cOK))
+						{						
+							$arrKontaktObjekte[] = $loopResult[1]; 
+							$loopResult = $objDBcommand->dbFetch($queryOnly);
+						}
+					
+						$Result[1] = $arrKontaktObjekte;
+					}									
+				}				
+			}
+			$objDBcommand->dbClose();
+			
+			return $Result;
 		} 	
 		
 		public function createKontakt($Kontakt)

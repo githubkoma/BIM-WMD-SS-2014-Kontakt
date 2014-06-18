@@ -11,7 +11,8 @@ http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/RequestHandler.php?command=GetKo
 	require "ErrIds.php";
 	require "DBCommand.php";
 	require "GetKontaktCommand.php";	
-	#require "CreateKontaktCommand.php";
+	require "GetKontakteCommand.php";	
+	require "CreateKontaktCommand.php";
 	#require "CreateKontaktResult.php";
 	#require "DeleteKontaktCommand.php";
 	#require "UpdateKontaktCommand.php";
@@ -36,7 +37,7 @@ http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/RequestHandler.php?command=GetKo
 
 			// Globale REQUEST Variable übernehmen
 			$request = $_REQUEST;			
-			// Bei HTTP PUT auch den BODY als Parameter miteinbeziehen
+			// Bei allem außer HTTP PUT enthält der Request schon den BODY
 			if ($_SERVER["REQUEST_METHOD"] == "PUT") 
 			{
 				parse_str(file_get_contents("php://input"), $body_parameters);
