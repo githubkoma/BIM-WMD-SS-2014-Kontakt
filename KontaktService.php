@@ -1,6 +1,6 @@
-<!--- Domänenspezifische Daten, kein HTML Bezug !--->
-
 <?php		
+	// Domänenspezifische Daten, kein HTML Bezug
+
 	//Globale für Sortierung und Richtung
 	$gOrderBy  = "cName";
 	$gOrderDir = "ASC";
@@ -18,11 +18,13 @@
 			
 			if ($Result[0] == ErrIds::cOK)
 			{							
-				$sqlState = "SELECT cId, cCrtDate, cCrtUser, cUpdtDate, " . 
-				"cUpdtUser, cNName, cVName, cBirthDay, cCity, " . 
-				"cMail, cPhone, cVersion " .
+				$sqlState = 
+				"SELECT cId, cCrtDate, cCrtUser, cUpdtDate, " . 
+					"cUpdtUser, cNName, cVName, cBirthDay, cCity, " . 
+					"cMail, cPhone, cVersion " .
 				"FROM ".  $objDBcommand->gTable . " " .
-				"WHERE cId = " . $id . ";";
+				"WHERE cId = " . $id . 
+				";";
 				
 				// SQL Absetzen, Falls OK: Ergebnis auswerten
 				$Result = $objDBcommand->dbQuery($sqlState);
@@ -51,12 +53,14 @@
 			
 			if ($Result[0] == ErrIds::cOK)
 			{							
-				$sqlState = "SELECT cId, cCrtDate, cCrtUser, cUpdtDate, " . 
-				"cUpdtUser, cNName, cVName, cBirthDay, cCity, " . 
-				"cMail, cPhone, cVersion " .
+				$sqlState = 
+				"SELECT cId, cCrtDate, cCrtUser, cUpdtDate, " . 
+					"cUpdtUser, cNName, cVName, cBirthDay, cCity, " . 
+					"cMail, cPhone, cVersion " .
 				"FROM ".  $objDBcommand->gTable . " " .
 				"ORDER BY " . $sqlOrderBy . " " . $sqlOrderDir . " " .
-				"LIMIT " . $sqlLimitFrom . " , " . $sqlLimitTo . ";";
+				"LIMIT " . $sqlLimitFrom . " , " . $sqlLimitTo . 
+				";";
 			
 				$Result = $objDBcommand->dbQuery($sqlState);
 				if ($Result[0] == ErrIds::cOK)
@@ -85,9 +89,38 @@
 			return $Result;
 		} 	
 		
-		public function createKontakt($Kontakt)
+		public function createKontakt($objKontakt)
 		{	
+			$Result[0] = ErrIds::cOK;
+			
+			$objDBcommand = new DBCommand();
+			$Result = $objDBcommand->dbConnect();
+			if ($Result[0] == ErrIds::cOK)
+			{
+				$sqlState = "INSERT INTO " . $objDBcommand->gTable . 
+							" SET " . 
+								"cCrtDate = CURDATE(), " .
+								"cCrtUser = '$objKontakt->cCrtUser', " .
+								"cUpdtDate = CURDATE(), " .
+								"cUpdtUser = '$objKontakt->cUpdtUser', " .
+								"cVName = '$objKontakt->cVName', " .
+								"cNName = '$objKontakt->cNName', " .
+								"cBirthDay = '$objKontakt->cBirthDay', " .
+								"cCity = '$objKontakt->cCity', " .
+								"cMail = '$objKontakt->cMail', " .
+								"cPhone = '$objKontakt->cMail', " .
+								"cCompany = '$objKontakt->cCompany', " .
+								"cVersion = 1" . 
+							";";
+													  
+				echo $sqlState;
+						
+				$Result = $objDBcommand->dbQuery($sqlState);
+				$objDBcommand->dbClose();
+
+			}
 		
+			return $Result;
 		}
 	
 		public function deleteKontakt($id)

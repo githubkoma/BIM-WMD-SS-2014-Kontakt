@@ -1,9 +1,7 @@
-<!--- 
-Nur allgemeine Funktionen hier aufrufen 
-http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/RequestHandler.php?command=GetKontaktCommand&id=2
-!--->
-
 <?php
+	
+	// Nur allgemeine Funktionen hier aufrufen
+	//http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/RequestHandler.php?command=GetKontaktCommand&id=2
 	
 	require "Kontakt.php";
 	require "KontaktService.php";

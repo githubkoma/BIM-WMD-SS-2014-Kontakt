@@ -1,6 +1,7 @@
-<!--- Spezielle Klasse um Anfrage von Kontakts abzufragen !--->
 
 <?php
+	
+	// Spezielle Klasse um Anfrage von Kontakts abzufragen
 	
 	class GetKontaktCommand 
 	{
