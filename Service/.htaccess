@@ -1,0 +1,34 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^Kontakte$ RequestHandler.php?command=GetKontakteCommand
+
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^Kontakte$ RequestHandler.php?command=CreateKontaktCommand
+
+RewriteCond %{REQUEST_METHOD} DELETE
+RewriteRule ^Kontakte/(.+)$ RequestHandler.php?command=DeleteKontaktCommand&id=$1
+
+RewriteCond %{REQUEST_METHOD} PUT
+RewriteRule ^Kontakte/(.+)$ RequestHandler.php?command=UpdateKontaktCommand&id=$1
+
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^Kontakte/(.+)$ RequestHandler.php?command=GetKontaktCommand&id=$1
+
+#RewriteRule ^Kontakte$ RequestHandler.php
+
+# Testen über Fiddler:->
+# GET 		http://localhost/githubkoma/Service/Kontakte/35
+# DELETE 	http://localhost/githubkoma/Service/Kontakte/4 
+# POST		http://localhost/githubkoma/Service/Kontakte/4 
+# PUT 		http://localhost/githubkoma/Service/Kontakte/43
+# anstatt
+# http://localhost/githubkoma/Service/Kontakte?command=GetKontaktCommand&id=4
+
+
+# PHP übernimmt den Body-Inhalt nur für GET und POST in $_REQUEST
+
+# AuthType Basic
+# AuthName "Todo-Liste"
+# AuthUserFile "C:\xampp\htdocs\githubkoma\Service\.htusers"
+# Require valid-user

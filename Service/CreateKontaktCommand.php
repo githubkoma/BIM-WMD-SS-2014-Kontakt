@@ -15,7 +15,7 @@ class CreateKontaktCommand
 			$objKontakt = new Kontakt();
 			
 			$objKontakt->cCrtUser = "admin2";
-			$objKontakt->cUpdtUser = "admin2";
+			//$objKontakt->cUpdtUser = "admin2";
 			//objKontakt->cCrtUser = $_SERVER["PHP_AUTH_USER"];
 			//Passwort: $_SERVER["PHP_AUTH_PW"];
 			

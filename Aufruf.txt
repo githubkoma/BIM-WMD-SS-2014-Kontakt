@@ -1,1 +1,0 @@
-http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/RequestHandler.php?command=GetKontaktCommand&id=1

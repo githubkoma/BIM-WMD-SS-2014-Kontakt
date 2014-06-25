@@ -1,0 +1,12 @@
+Nur für GET Methode:
+--------------------
+Mit .htaccess:
+  http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/Service/Kontakte/1
+  http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/Service/Kontakte
+
+Ohne .htacces:
+  http://localhost/GitHub/BIM-WMD-SS-2014-Kontakt/Service/RequestHandler.php?command=GetKontaktCommand&id=1
+
+Für PUT/POST/DELETE etc
+-----------------------
+Im Fiddler die HTTP METHOD simulieren

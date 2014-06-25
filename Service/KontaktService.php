@@ -1,10 +1,5 @@
 <?php		
-	// Domänenspezifische Daten, kein HTML Bezug
-
-	//Globale für Sortierung und Richtung
-	$gOrderBy  = "cName";
-	$gOrderDir = "ASC";
-	
+	// Domänenspezifische Daten, kein HTML Bezug	
 	class KontaktService 
 	{		
 		private $Result = array();	
@@ -112,7 +107,7 @@
 								"cCompany = '$objKontakt->cCompany', " .
 								"cVersion = 1" . 
 							";";
-													  
+						
 				echo $sqlState;
 						
 				$Result = $objDBcommand->dbQuery($sqlState);
@@ -124,7 +119,32 @@
 		}
 	
 		public function deleteKontakt($id)
-		{			
+		{	
+			$Result[0] = ErrIds::cOK;
+			
+			$objDBcommand = new DBCommand();
+			$Result = $objDBcommand->dbConnect();
+			if ($Result[0] == ErrIds::cOK)
+			{
+				// Prüfen, ob der Datensatz überhaupt besteht
+				$Result = $this->readKontakt($id);
+				if ($Result[0] == ErrIds::cOK)
+				{		$sqlState = 
+						"DELETE FROM " . $objDBcommand->gTable . " " . 
+						"WHERE cId = " . $id .
+						";";
+					 
+						echo $sqlState;
+					
+						$Result = $objDBcommand->dbQuery($sqlState);			
+				}				
+				
+				$objDBcommand->dbClose();
+
+			}
+		
+			return $Result;
+		
 			
 		}
 		
@@ -136,18 +156,16 @@
 			$Result = $objDBcommand->dbConnect();
 			if ($Result[0] == ErrIds::cOK)
 			{
+				// Prüfen, ob der Datensatz überhaupt besteht
 				$Result = $this->readKontakt($objKontakt->cId);
 				if ($Result[0] == ErrIds::cOK)
-				{			
-				
-					var_dump($objKontakt);
-					var_dump($Result);					
-					
+				{						
+					// Datensatz darf sich zwischenzeitlich nicht geändert haben
 					If ($Result[1]->cVersion == $objKontakt->cVersion)
 					{
 						$sqlState = 
-						"UPDATE " . $objDBcommand->gTable . 
-						" SET " . 
+						"UPDATE " . $objDBcommand->gTable . " " . 
+						"SET " . 
 							"cUpdtDate = CURDATE(), " .
 							"cUpdtUser = '$objKontakt->cUpdtUser', " .
 							"cVName = '$objKontakt->cVName', " .

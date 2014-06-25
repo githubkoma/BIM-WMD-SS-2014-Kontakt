@@ -11,8 +11,7 @@
 	require "GetKontaktCommand.php";	
 	require "GetKontakteCommand.php";	
 	require "CreateKontaktCommand.php";
-	#require "CreateKontaktResult.php";
-	#require "DeleteKontaktCommand.php";
+	require "DeleteKontaktCommand.php";
 	require "UpdateKontaktCommand.php";
 	
 	// Instanz der Klasse RequestHandler
