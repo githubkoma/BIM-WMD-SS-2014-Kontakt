@@ -82,19 +82,19 @@
 			return $Result;
 		}
 		
-		public function dbFetchRow($resSet,&$dbRec)
+		public function dbFetchRow($query)
 		{
 			
-			$dbRec = $resSet->fetch_row();
-			if  ($dbRec === FALSE)
+			$Result[1] = $query->fetch_row();
+			if  ($Result[1] === FALSE)
 			{
-				return ErrIds::cErrTableEmpty;
-			} else if ($dbRec == NULL)
+				$Result[0] = ErrIds::cErrTableEmpty;
+			} else if ($Result[1] == NULL)
 				{
-					return ErrIds::cErrDBBFetchRow;
+					$Result[0] = ErrIds::cErrDBBFetchRow;
 				}
 			
-			return ErrIds::cOK;
+			return $Result;
 		}
 	}
 ?>

@@ -37,25 +37,16 @@
 				$objKontaktService = new KontaktService();
 				$Result = $objKontaktService->readKontakt($Id);
 				
-				//if ($Result[0] == errIds::cOK)
-				//{
-				//	return $Result;
-				//}
-				//$dbRec->url = "/TeamProject/Service/contact/$dbRec->cId";
-				//	unset($dbRec->cId);
-				//	header("Etag: $dbRec->cVersion");
-				//	unset($dbRec->cVersion);
-				//}
-			
-				//if ($Kontakt == KontaktService::NOT_FOUND) 
-				//{
-				//	header("HTTP/1.1 404");
-				//	return;
-				//}
+				if ($Result[0] == errIds::cOK)
+				{						
+					$Result[1]->url = "/TeamProject/Service/contact/$Id";
+					unset($Result[1]->cId);
+					$TempVersion = $Result[1]->cVersion;
+					header("Etag: $TempVersion");
+					unset($Result[1]->cVersion);
+				}
 			
 			}
-			
-			// header("Etag: $Kontakt->cVersion");
 				
 			return $Result;	
 		}

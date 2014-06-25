@@ -128,9 +128,55 @@
 			
 		}
 		
-		public function updateKontakt($Kontakt)
+		public function updateKontakt($objKontakt)
 		{			
-	
+			$Result[0] = ErrIds::cOK;
+			
+			$objDBcommand = new DBCommand();
+			$Result = $objDBcommand->dbConnect();
+			if ($Result[0] == ErrIds::cOK)
+			{
+				$Result = $this->readKontakt($objKontakt->cId);
+				if ($Result[0] == ErrIds::cOK)
+				{			
+				
+					var_dump($objKontakt);
+					var_dump($Result);					
+					
+					If ($Result[1]->cVersion == $objKontakt->cVersion)
+					{
+						$sqlState = 
+						"UPDATE " . $objDBcommand->gTable . 
+						" SET " . 
+							"cUpdtDate = CURDATE(), " .
+							"cUpdtUser = '$objKontakt->cUpdtUser', " .
+							"cVName = '$objKontakt->cVName', " .
+							"cNName = '$objKontakt->cNName', " .
+							"cBirthDay = '$objKontakt->cBirthDay', " .
+							"cCity = '$objKontakt->cCity', " .
+							"cMail = '$objKontakt->cMail', " .
+							"cPhone = '$objKontakt->cMail', " .
+							"cCompany = '$objKontakt->cCompany', " .
+							"cVersion = cVersion + 1 " . 
+						"WHERE cId = " . $objKontakt->cId . " " .
+						";";
+															  
+						echo $sqlState;
+								
+						$Result = $objDBcommand->dbQuery($sqlState);
+
+					} else
+					{
+						$Result[0] = ErrIds::cErrRecordChanged;
+					}
+				
+				}				
+				
+				$objDBcommand->dbClose();
+
+			}
+		
+			return $Result;
 		}
 	
 	}

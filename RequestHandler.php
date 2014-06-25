@@ -13,7 +13,7 @@
 	require "CreateKontaktCommand.php";
 	#require "CreateKontaktResult.php";
 	#require "DeleteKontaktCommand.php";
-	#require "UpdateKontaktCommand.php";
+	require "UpdateKontaktCommand.php";
 	
 	// Instanz der Klasse RequestHandler
 	$reqHndl = new RequestHandler();	
@@ -32,7 +32,7 @@
 			// Error-Handler initialisieren, mit 'OK' starten
 			$errObj = new ErrHandle();
 			$Result[0] = ErrIds::cOK;				
-
+			
 			// Globale REQUEST Variable übernehmen
 			$request = $_REQUEST;			
 			// Bei allem außer HTTP PUT enthält der Request schon den BODY
@@ -44,7 +44,7 @@
 			
 			// Liefert alle Zeilen des aktuellen HTTP-Requestheaders
 			$request_headers = apache_request_headers();
-			
+		
 			// Dynamischer Klassenaufruf, anhand Key+Value in URL: ?command=xxx
 			$class_name = $request["command"];				
 			if (class_exists($class_name)) 
