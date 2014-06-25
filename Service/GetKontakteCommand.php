@@ -18,21 +18,18 @@
 			$sqlOrderDir = "ASC";			
 			
 			$objKontaktService = new KontaktService();
-			//$errObj = new ErrHandling();
 			
-			//$retC = $csObj->maxPageCnt($maxPages);
-			//var_dump($maxPages);
+			//$Result = $objKontaktService->maxPageCnt($maxPages);
 			
 			$Result = $objKontaktService->readKontakte($sqlLimitFrom,  $sqlLimitTo, $sqlOrderBy, $sqlOrderDir);
 			
 			if ($Result[0] == errIds::cOK)
 			{
-				//foreach ($arrRecs as $contact)
-				//{
-				//	//$contact->url = "/bwi2131012/contact/$contact->cId";
-				//	$contact->url = "/TeamProject/Service/contact/$contact->cId";
-				//	unset($contact->cId);
-				//}			
+				foreach ($Result[1] as $Kontakt)
+				{
+					$Kontakt->url = "/BIM-WMD-SS-2014/Service/Kontakte/$Kontakt->cId";
+					unset($Kontakt->cId);
+				}
 			}
 			return $Result;	
 		}

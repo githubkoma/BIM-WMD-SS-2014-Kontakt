@@ -196,6 +196,39 @@
 		
 			return $Result;
 		}
+		
+		//Anzahl der Seiten ermitteln
+		public function maxPageCnt(&$maxPages)
+		{
+			$Result[0] = ErrIds::cOK;
+			
+			$objDBcommand = new DBCommand();
+			$Result = $objDBcommand->dbConnect();
+			
+			if ($Result[0] == ErrIds::cOK)
+			{			
+				$sqlState = "SELECT COUNT(*) 
+							 FROM " . $objDBcommand->gTable . ";";
+				
+				$Result = $objDBcommand->dbQuery($sqlState);
+				
+				var_dump($Result);
+				
+				if  ($Result[0] == ErrIds::cOK)
+				{
+					$Result[1] = $objDBcommand->dbFetchRow($resSet,$dbRec);
+					if  ($Result[0] == ErrIds::cOK)
+					{
+						$dbRec 	  = $dbRec[0];
+						$maxPages = ceil($dbRec / $sqlLimitTo); 
+					}
+				}
+			
+			}
+			
+			$objDBcommand->dbClose();
+			return $Result;
+		}
 	
 	}
 

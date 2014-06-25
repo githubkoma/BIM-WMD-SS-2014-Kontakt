@@ -30,16 +30,14 @@ class CreateKontaktCommand
 			$Result = $objKontaktService->createKontakt($objKontakt);
 			if ($Result[0] == ErrIds::cOK)
 			{
-				$objKontakt->url = "/githubkoma/BIM-WMD-SS-2014/$objKontakt->cId";
-				header("Location: /githubkoma/BIM-WMD-SS-2014/RequestHandler.php?command=GetKontaktCommand&id=XYZ");
-				unset($objKontakt->cId);	
+				$objKontakt->url = "/BIM-WMD-SS-2014/Service/Kontakte";
+				//$TempURL = $objKontakt->url;
+				header("Location: $objKontakt->url");
 				header("HTTP/1.1 201");
-			
+				unset($objKontakt->cId);			
 			}
 			
 		}
-		
-		var_dump($request); 
 		
 		return $Result;
 	}			

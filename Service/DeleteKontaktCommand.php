@@ -3,7 +3,7 @@
 	
 	// Spezielle Klasse um Anfrage von Kontakts abzufragen
 	
-	class GetKontaktCommand 
+	class DeleteKontaktCommand 
 	{
 		private $Result = array();	
 	
@@ -12,9 +12,7 @@
 			//Initialisieren
 			$Result[0] = ErrIds::cOK;				
 			$id = 0;
-			
-			// Formale Prüfung der Request ID
-			// Vorhanden? Nur Zahlenwert? etc.
+
 			if (isset($request["id"])) {
 			
 				if  (is_numeric($request["id"]))
@@ -35,15 +33,12 @@
 			if ($Result[0] == errIds::cOK) 
 			{
 				$objKontaktService = new KontaktService();
-				$Result = $objKontaktService->readKontakt($Id);
+				$Result = $objKontaktService->deleteKontakt($Id);
 				
 				if ($Result[0] == errIds::cOK)
-				{			
-					$Result[1]->url = "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte/$Id";
-					$TempVersion = $Result[1]->cVersion;
-					header("Etag: $TempVersion");
-					unset($Result[1]->cId);
-					unset($Result[1]->cVersion);
+				{						
+					header("HTTP/1.1 201");
+					header("Location: /BIM-WMD-SS-2014-Kontakt/Service/Kontakte");
 				}
 			
 			}
