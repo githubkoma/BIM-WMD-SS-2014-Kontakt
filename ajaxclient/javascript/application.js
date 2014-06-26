@@ -7,11 +7,11 @@ $(function() {
 	{
 		//alert(request.statusText); // Status aus Server-Response
 		$("#error_dialog").errorDialog("open", request.statusText);
-		$("#kontakt_liste").show();
-		$("#kontakt_details").hide();
 		
 		if (request.status==404) 
 		{
+			$("#kontakt_liste").show();
+			$("#kontakt_details").hide();
 			$("#kontakt_liste").kontaktListe("reload");
 		}
 		
@@ -39,6 +39,7 @@ $(function() {
 	
 	// Weitere Widgets instanziieren:
 	$("#error_dialog").errorDialog(); // = jQuery("error_dialog").todoList();
+	
 	$("#delete_dialog").deleteDialog(
 	{
 		onKontaktDeleted: function()
@@ -47,6 +48,14 @@ $(function() {
 			$("#kontakt_liste").kontaktListe("reload");
 		}
 	});
-	$("#kontakt_details").kontaktDetails();
+	$("#kontakt_details").kontaktDetails(
+	{
+		onKontaktClicked: function(event,url)
+		{
+			$("#kontakt_details").hide();
+			$("#kontakt_liste").show();
+			$("#kontakt_liste").kontaktListe("reload"); //,url);
+		}	
+	});
 	
 });
