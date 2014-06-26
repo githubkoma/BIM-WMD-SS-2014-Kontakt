@@ -43,7 +43,7 @@ $(function() {
 	{
 		onKontaktDeleted: function()
 		{
-			alert("wirklich deleted");
+			//alert("wirklich deleted");
 			$("#kontakt_liste").kontaktListe("reload");
 		}
 	});

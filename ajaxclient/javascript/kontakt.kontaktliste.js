@@ -6,8 +6,8 @@ $.widget("kontakt.kontaktListe",
 	{
 		$.ajax(
 		{
-		   //url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
-		   url: "/GitHub/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
+		   url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
+		   //url: "/GitHub/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
 		   dataType: "json",
 		   success: this._appendKontakte,
 		   context: this
@@ -17,7 +17,8 @@ $.widget("kontakt.kontaktListe",
     {					// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
 		this._load();
 	},
-  	reload: function()
+  	
+	reload: function()
 	{
 		this.element.find(".kontakt:not(.template)").remove();
 		this._load();
@@ -27,7 +28,7 @@ $.widget("kontakt.kontaktListe",
 	{	
 		var that = this;
 		
-		alert("Kontakte eingelesen");
+		//alert(kontakte.length);
 		for (var i = 0; i < kontakte.length; i++) 
 		{			
 			//alert("Datensatz "+i);

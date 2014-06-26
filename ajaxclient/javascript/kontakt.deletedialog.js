@@ -51,7 +51,7 @@ $.widget("kontakt.deleteDialog", $.ui.dialog,
 		},
 		context: this
 	});
-	alert("Kontakt gelöscht");
+	//alert("Kontakt gelöscht");
   }    
   
 });
