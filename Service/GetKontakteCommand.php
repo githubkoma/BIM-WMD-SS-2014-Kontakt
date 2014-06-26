@@ -27,7 +27,7 @@
 			{
 				foreach ($Result[1] as $Kontakt)
 				{
-					$Kontakt->url = "/BIM-WMD-SS-2014/Service/Kontakte/$Kontakt->cId";
+					$Kontakt->url = "/GitHub/BIM-WMD-SS-2014-Kontakt/Service/Kontakte/$Kontakt->cId";
 					unset($Kontakt->cId);
 				}
 			}

@@ -62,7 +62,7 @@
 				if  ($Result[1] !== NULL) 
 				{
 					//Formatierung in JSON-Zeichenkette
-					echo(json_encode($Result));						
+					echo(json_encode($Result[1]));						
 				}
 			}
 			
