@@ -62,8 +62,6 @@ $.widget("kontakt.kontaktListe",
 			
 			this.element.append(kontaktElement); // Element nun in HTML anhängen		
 			
-			
-			
 		}
 	}
   
