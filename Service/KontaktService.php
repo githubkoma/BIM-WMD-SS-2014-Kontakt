@@ -15,7 +15,7 @@
 			{							
 				$sqlState = 
 				"SELECT cId, cCrtDate, cCrtUser, cUpdtDate, " . 
-					"cUpdtUser, cNName, cVName, cBirthDay, cCity, " . 
+					"cUpdtUser, cNName, cVName, cBirthDay, cCompany, cCity, " . 
 					"cMail, cPhone, cVersion " .
 				"FROM ".  $objDBcommand->gTable . " " .
 				"WHERE cId = " . $id . 
@@ -50,7 +50,7 @@
 			{							
 				$sqlState = 
 				"SELECT cId, cCrtDate, cCrtUser, cUpdtDate, " . 
-					"cUpdtUser, cNName, cVName, cBirthDay, cCity, " . 
+					"cUpdtUser, cNName, cVName, cBirthDay, cCompany, cCity, " . 
 					"cMail, cPhone, cVersion " .
 				"FROM ".  $objDBcommand->gTable . " " .
 				"ORDER BY " . $sqlOrderBy . " " . $sqlOrderDir . " " .

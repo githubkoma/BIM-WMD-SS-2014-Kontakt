@@ -15,7 +15,7 @@ RewriteRule ^Kontakte/(.+)$ RequestHandler.php?command=UpdateKontaktCommand&id=$
 RewriteCond %{REQUEST_METHOD} GET
 RewriteRule ^Kontakte/(.+)$ RequestHandler.php?command=GetKontaktCommand&id=$1
 
-#RewriteRule ^Kontakte$ RequestHandler.php
+RewriteRule ^Kontakte$ RequestHandler.php
 
 # Testen über Fiddler:->
 # GET 		http://localhost/githubkoma/Service/Kontakte/35
