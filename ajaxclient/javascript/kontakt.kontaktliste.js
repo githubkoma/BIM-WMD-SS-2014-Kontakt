@@ -2,36 +2,27 @@ $.widget("kontakt.kontaktListe",
 {  
   // Javascript kennt kein private/public. Laut Programmierkonvention "soll" man
   // für private Eigenschaften mit einem _ Unterstrich beginnen
-  _create: function() 
-  {
-	
-	alert("Im Konstruktor kontaktListe");
-	
-	// Statische Hilfsmethode: jQuery.ajax({});
-	$.ajax(
+  _load: function()
 	{
-		// Bei HTTP Anfragen wird nachfolgender Code asynchron ausgeführt
-		url: "/GitHub/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
-		dataType: "json",
-		success: this._appendKontakte,
-		context: this
-		
-	});
-	
-  },
-  
-  reload: function()
-  {
-    this.element.find(".kontakt:not(.template)").remove();
-	$.ajax
-	({
-		url: "/GitHub/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
-		dataType: "json",
-		success: this._appendKontakte,
-		context: this
-	});
-  },
-	
+		$.ajax(
+		{
+		   //url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
+		   url: "/GitHub/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
+		   dataType: "json",
+		   success: this._appendKontakte,
+		   context: this
+		});		
+	},
+  	_create: function() 
+    {					// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
+		this._load();
+	},
+  	reload: function()
+	{
+		this.element.find(".kontakt:not(.template)").remove();
+		this._load();
+	},
+   
 	_appendKontakte: function(kontakte) 
 	{	
 		var that = this;

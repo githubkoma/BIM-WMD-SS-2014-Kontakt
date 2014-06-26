@@ -21,16 +21,17 @@ $.widget("todo.errorDialog", $.ui.dialog,
 	// "this" bezieht sich innerhalb des Click-Handlers NICHT MEHR auf das 
 	// Widget an sich, daher für den Zugriff in "that" zwischenspeichern
 	var that = this;
-	this.options.buttons = [
+	this.options.buttons = 
+	[
 	{		
 		text: "Schließen",
 		click: function()
-	{
-		that.close();
-	}
+	    {
+		   that.close();
+	    }
 		
-	  }
-	  ];
+	}
+	];
 	  // Überschriebene Methode mit gleichem Namen ausführen
 	  this._super();
   }

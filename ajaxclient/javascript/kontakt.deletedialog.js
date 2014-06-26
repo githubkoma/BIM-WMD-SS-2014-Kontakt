@@ -41,8 +41,8 @@ $.widget("kontakt.deleteDialog", $.ui.dialog,
 
   _deleteKontakt: function()
   {
-	$.ajax
-	({
+	$.ajax(
+	{
 		type: "DELETE",
 		url: this._kontakt.url,
 		success: function()
