@@ -4,19 +4,44 @@ $(function() {
 	// Registrieren einer Funktion, für das gesamte HTML $(document)
 	// .ajaxError: speziell bei Fehlern in HTTP Kommunikation
 	$(document).ajaxError(function(event, request)
-	{
+	{	
+		if (request.status!==400) 
+		{
+			return; // Spaghetti = True;
+		}
+	
 		//alert(request.statusText); // Status aus Server-Response
 		$("#error_dialog").errorDialog("open", request.statusText);
+		$("#kontakt_liste").show();
+		$("#kontakt_details").hide();
 		
 		if (request.status==404) 
-		{
-			$("#kontakt_liste").show();
-			$("#kontakt_details").hide();
+		{		
 			$("#kontakt_liste").kontaktListe("reload");
 		}
 		
 	});
 	
+	// Bei JEDER ajax-Anfrage wird die GUI zu erst blockiert
+	$(document).ajaxStart(function()
+	{
+		$.blockUI({message:null});
+	});
+	// Nach Beendigung JEDER ajax-Anfrage wird die UI wieder entsperrt
+	$(document).ajaxStop(function()
+	{
+		$.unblockUI();
+	});
+	
+	// Menüleiste instanziieren
+	$("#menu_bar").menuBar(
+	{
+		onShowKontakteClicked: function() {
+			$("#kontakt_liste").show();
+			$("#kontakt_details").hide();
+		},
+	}
+	);
 	
 	// HTML Element verknüpfen und Widget namens "todoList" instanziieren
 	$("#kontakt_liste").kontaktListe(
@@ -33,8 +58,15 @@ $(function() {
 			{
 				//alert("delete");
 				$("#delete_dialog").deleteDialog("open",kontakt);
-			}
+			},
 			
+			
+		onEditKontaktClicked: function(event, kontakt)
+			{
+				//alert("in application.js");
+				$("#edit_dialog").editDialog("open",kontakt);
+			}
+						
 		});
 	
 	// Weitere Widgets instanziieren:
@@ -48,14 +80,24 @@ $(function() {
 			$("#kontakt_liste").kontaktListe("reload");
 		}
 	});
+	
 	$("#kontakt_details").kontaktDetails(
 	{
 		onKontaktClicked: function(event,url)
 		{
 			$("#kontakt_details").hide();
 			$("#kontakt_liste").show();
-			$("#kontakt_liste").kontaktListe("reload"); //,url);
+			//$("#kontakt_liste").kontaktListe("reload"); //,url);
 		}	
+	});
+	
+	$("#edit_dialog").editDialog(
+	{		
+		onKontaktUpdated: function()
+		{
+			alert("success: geupdated");
+			$("#kontakt_list").kontaktListe("reload");
+		}
 	});
 	
 });
