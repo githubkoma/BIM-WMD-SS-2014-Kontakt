@@ -113,7 +113,7 @@ $(function() {
 	{		
 		onKontaktCreated: function()
 		{
-			alert("success: geupdated");
+			alert("success: created");
 			$("#kontakt_list").kontaktListe("reload");
 		}
 	});

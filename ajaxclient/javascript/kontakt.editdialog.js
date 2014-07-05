@@ -24,7 +24,9 @@ $.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
 	this.element.find("#phone_field").val(kontakt.cPhone); 
 	this.element.find("#city_field").val(kontakt.cCity); 
 	this.element.find("#mail_field").val(kontakt.cMail);
-	this.element.find("#birthday_field").val(kontakt.cBirthDay);
+	var dateFormat = kontakt.cBirthDay;
+	var dateFormat = $.datepicker.formatDate('dd.mm.yy', new Date(dateFormat));
+	this.element.find("#birthday_field").val(dateFormat);
 	
 	this._super(); // "Open" der Basisklasse aufrufen, um Dialog zu öffnen
 	

@@ -14,10 +14,20 @@ $.widget("kontakt.createDialog", $.ui.dialog, // Standard Template für Dialog
 	//this._kontakt = kontakt; // Klassen-Attribut als temporäre Variable nutzen
 	
 	this.element.find(".validation_message").empty();
-	this.element.find("#nname_field").removeClass("ui-state-error");
-	this.element.find("#vname_field").removeClass("ui-state-error");
-	this.element.find("#company_field").removeClass("ui-state-error");
 	
+	this.element.find("#crt_nname_field").removeClass("ui-state-error");
+	this.element.find("#crt_vname_field").removeClass("ui-state-error");
+	this.element.find("#crt_company_field").removeClass("ui-state-error");
+	
+	//Felder rücksetzen!
+	this.element.find("#crt_nname_field").val("");
+	this.element.find("#crt_vname_field").val("");
+	this.element.find("#crt_company_field").val("");
+	this.element.find("#crt_phone_field").val("");
+	this.element.find("#crt_city_field").val("");
+	this.element.find("#crt_mail_field").val("");
+	this.element.find("#crt_birthday_field").val("");
+
 	this._super(); // "Open" der Basisklasse aufrufen, um Dialog zu öffnen
 	
   },
@@ -53,13 +63,13 @@ $.widget("kontakt.createDialog", $.ui.dialog, // Standard Template für Dialog
   {
 
 	var kontakt = {	// <- dies ist eine Javascript Klasse
-		cNName: this.element.find("#nname_field").val(),
-		cVName: this.element.find("#vname_field").val(),
-		cCompany: this.element.find("#company_field").val(),
-		cPhone: this.element.find("#phone_field").val(),
-		cCity: this.element.find("#city_field").val(),
-		cMail: this.element.find("#mail_field").val(),
-		cBirthday: this.element.find("#birthday_field").val()
+		cNName: this.element.find("#crt_nname_field").val(),
+		cVName: this.element.find("#crt_vname_field").val(),
+		cCompany: this.element.find("#crt_company_field").val(),
+		cPhone: this.element.find("#crt_phone_field").val(),
+		cCity: this.element.find("#crt_city_field").val(),
+		cMail: this.element.find("#crt_mail_field").val(),
+		cBirthday: this.element.find("#crt_birthday_field").val()
 	};
 	
 	$.ajax
@@ -77,9 +87,9 @@ $.widget("kontakt.createDialog", $.ui.dialog, // Standard Template für Dialog
 		error: function(request)
 		{
 			this.element.find(".validation_message").empty();
-			this.element.find("#nname_field").removeClass("ui-state-error");
-			this.element.find("#vname_field").removeClass("ui-state-error");
-			this.element.find("#company_field").removeClass("ui-state-error");
+			this.element.find("#crt_nname_field").removeClass("ui-state-error");
+			this.element.find("#crt_vname_field").removeClass("ui-state-error");
+			this.element.find("#crt_company_field").removeClass("ui-state-error");
 			if (request.status==400) 
 			{
 				var validationMessages = $.parseJSON(request.responseText);
@@ -87,21 +97,21 @@ $.widget("kontakt.createDialog", $.ui.dialog, // Standard Template für Dialog
 				{
 					alert(validationMessages);
 					this.element.find(".validation_message").text(validationMessages.nname);
-					this.element.find("#nname_field").addClass("ui-state-error").focus();
+					this.element.find("#crt_nname_field").addClass("ui-state-error").focus();
 				}
 				
 				if (validationMessages.vname)
 				{
 					alert(validationMessages);
 					this.element.find(".validation_message").text(validationMessages.vname);
-					this.element.find("#vname_field").addClass("ui-state-error").focus();
+					this.element.find("#crt_vname_field").addClass("ui-state-error").focus();
 				}
 				
 				if (validationMessages.company)
 				{
 					alert(validationMessages);
 					this.element.find(".validation_message").text(validationMessages.company);
-					this.element.find("#company_field").addClass("ui-state-error").focus();
+					this.element.find("#crt_company_field").addClass("ui-state-error").focus();
 				}
 				
 			}

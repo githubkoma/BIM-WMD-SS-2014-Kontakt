@@ -19,12 +19,18 @@ $.widget("kontakt.kontaktDetails",
 		this.element.find(".vname").text(kontakt.cNName);
 		this.element.find(".company").text(kontakt.cCompany);
 		this.element.find(".city").text(kontakt.cCity);
-		this.element.find(".birthday").text(kontakt.cBirthDay);
+		var dateFormat = kontakt.cBirthDay;
+		var dateFormat = $.datepicker.formatDate('dd.mm.yy', new Date(dateFormat));
+		this.element.find(".birthday").text(dateFormat);
 		this.element.find(".mail").text(kontakt.cMail);
 		this.element.find(".phone").text(kontakt.cPhone);
-		this.element.find(".crtdate").text(kontakt.cCrtDate);
+		var dateFormat = kontakt.cCrtDate;
+		var dateFormat = $.datepicker.formatDate('dd.mm.yy', new Date(dateFormat));
+		this.element.find(".crtdate").text(dateFormat);
 		this.element.find(".crtuser").text(kontakt.cCrtUser);
-		this.element.find(".updtdate").text(kontakt.cUpdtDate);
+		var dateFormat = kontakt.cUpdtDate;
+		var dateFormat = $.datepicker.formatDate('dd.mm.yy', new Date(dateFormat));
+		this.element.find(".updtdate").text(dateFormat);	
 		this.element.find(".updtuser").text(kontakt.cUpdtUser);
 		//this.element.find(".age").text(kontakt.cAge);  ? wird doch berechnet ? sollte dies nciht im Client passieren ?
 		/* this.element.click(kontakt.url, function(event)
