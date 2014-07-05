@@ -14,9 +14,16 @@
 	<script src="./javascript/kontakt.errordialog.js" type="text/javascript"></script>
 	<script src="./javascript/kontakt.deletedialog.js" type="text/javascript"></script>
 	<script src="./javascript/kontakt.editdialog.js" type="text/javascript"></script>
+	<script src="./javascript/kontakt.createdialog.js" type="text/javascript"></script>
 	<!-- Alle Javascript Klassen VOR der Mainline laden (application.js) -->
     <script src="./javascript/application.js" type="text/javascript"></script>
 
+	<script>
+		$(function()
+		{	$(".birthday").datepicker({ dateFormat: 'dd.mm.yy' });
+		});
+	</script>
+	
   </head>
   <body>  
     <div id="menu_bar" class="ui-widget">
@@ -122,8 +129,8 @@
 		  
           <tr>
             <td>
-              <label for="nname_field">Fällig</label>,
-              <label for="vname_field">Titel</label>:
+              <label for="nname_field">Nachname</label>,
+              <label for="vname_field">Vorname</label>:
             </td>
             <td><input id="nname_field" type="text"/></td>
             <td><input id="vname_field" type="text"/></td>
@@ -149,10 +156,57 @@
 
 		  <tr>
             <td>
-              <label for="birthday_field">Geburtstag</label>:
+              <label for="birthday_field">Geburtstag</label>
+			</td>
+            <td><input id="birthday_field" class="birthday" type="text"/></td>
+          </tr>
+		  
+        </table>
+      </form>
+    </div>
+	
+	<div id="create_dialog" title="Kontakt erstellen" class="ui-widget">
+      <form>
+        <table>
+          <!--Pro Zeile 2 Felder, zu erst die mögliche Fehlernachricht -->
+		  <tr>
+            <td/>
+            <td colspan="2"><span class="validation_message ui-state-error-text"></span></td>
+          </tr>
+		  
+          <tr>
+            <td>
+              <label for="nname_field">Nachname</label>,
+              <label for="vname_field">Vorname</label>:
             </td>
-            <td><input id="birthday_field" type="date"/></td>
-          </tr	
+            <td><input id="nname_field" type="text"/></td>
+            <td><input id="vname_field" type="text"/></td>
+          </tr>
+		  
+		  <tr>
+            <td>
+              <label for="company_field">Firma</label>,
+              <label for="phone_field">Telefon</label>:
+            </td>
+            <td><input id="company_field" type="text"/></td>
+            <td><input id="phone_field" type="text"/></td>
+          </tr>
+
+		  <tr>
+            <td>
+              <label for="city_field">Stadt</label>,
+              <label for="mail_field">E-Mail</label>:
+            </td>
+            <td><input id="city_field" type="text"/></td>
+            <td><input id="mail_field" type="text"/></td>
+          </tr>
+
+		  <tr>
+            <td>
+              <label for="birthday_field">Geburtstag</label>
+			</td>
+            <td><input id="birthday_field" class="birthday" type="date"/></td>
+          </tr>
 		  
         </table>
       </form>

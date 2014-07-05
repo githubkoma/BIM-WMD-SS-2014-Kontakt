@@ -18,10 +18,11 @@
 					 break;
 				case ErrIds::cErrRecordChanged:
 					 $ErrMessage = "RecordChanged: " . $errCode;
+					 header("HTTP/1.1 400");
 					 break;	
 				case ErrIds::cErrRecordNotFound:
 					 $ErrMessage = "RecordNotFound: " . $errCode;
-					 //header("HTTP/1.1 404");
+					 header("HTTP/1.1 404");
 					 break;
 				case ErrIds::cErrWrongData:
 					 $ErrMessage = "Wrong or missing Data: " . $errCode;
@@ -63,6 +64,28 @@
 				case ErrIds::cErrDBBFetchRow:
 					 $ErrMessage = "FetchRow failed: " . $errCode;
 					 break;
+				
+				
+				case ErrIds::cErrInputNName:
+					header("HTTP/1.1 400");
+					 $ErrMessage = array();
+					 $ErrMessage["nname"] = "Fehler in Eingabe: Nachname";
+					 //$ErrMessage = "Fehler in Nachname: " . $errCode;
+					 break;
+				
+				case ErrIds::cErrInputVName:
+					header("HTTP/1.1 400");
+					 $ErrMessage = array();
+					 $ErrMessage["vname"] = "Fehler in Eingabe: Vorname";
+					 //$ErrMessage = "Fehler in Vorname: " . $errCode;
+					 break;
+				case ErrIds::cErrInputCompany:
+					header("HTTP/1.1 400");
+					 $ErrMessage = array();
+					 $ErrMessage["company"] = "Fehler in Eingabe: Firma";
+					 $ErrMessage = "Fehler in Firma " . $errCode;
+					 break;
+				
 				default: 
 					$ErrMessage = "unknown Error: " . $errCode;
 					break;

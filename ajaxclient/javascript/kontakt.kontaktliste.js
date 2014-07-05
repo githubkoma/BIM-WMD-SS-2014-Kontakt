@@ -12,6 +12,7 @@ $.widget("kontakt.kontaktListe",
 		   context: this
 		});		
 	},
+	
   	_create: function() 
     {	// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
 		this._load();
@@ -19,7 +20,11 @@ $.widget("kontakt.kontaktListe",
   	
 	reload: function()
 	{
-		this.element.find(".kontakt:not(.template)").remove();
+		//this.element.find(".kontakt:not(.template)").remove();
+		KontaktButNotTemplate = this.element.find(".kontakt:not(.template)");
+		KontaktButNotTemplate.remove();
+		//console.debug(abc);
+		
 		this._load();
 	},
    
@@ -47,7 +52,7 @@ $.widget("kontakt.kontaktListe",
 			// und zwischengespeichert. Die Funktion wird erst später bei klick ausgeführt.
 			// Sonst hätte todo.url immer den Wert des letzten Todos.....
 			kontaktElement.click(kontakt.url, function(event)
-			{				
+			{
 				that._trigger("onKontaktClicked", null, event.data); // "Geklickt" zurückgeben
 			});
 			

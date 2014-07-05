@@ -49,7 +49,7 @@ class UpdateKontaktCommand
 		
 		$id = 0;
 		
-		var_dump($request);
+		//var_dump($request);
 		
 		// Formale Prüfung der Requestsfelder
 		if ((isset($request["id"]) !== TRUE) or
@@ -62,25 +62,28 @@ class UpdateKontaktCommand
 		if ((isset($request["cVName"]) !== TRUE) or
 			($request["cVName"]) == NULL)
 		{
-			echo "2";
-			$Result[0] = ErrIds::cErrWrongParameter;
+			$Result[0] = ErrIds::cErrInputVName;
 		}
 		
 		if ((isset($request["cNName"]) !== TRUE) or
-			($request["cNName"]) == NULL)
+			($request["cNName"]) == "")
 		{
-			echo "3";
-			$Result[0] = ErrIds::cErrWrongParameter;
+			$Result[0] = ErrIds::cErrInputNName;
 		}
 		
 		if ((isset($request["cCompany"]) !== TRUE) or
 			($request["cCompany"]) == NULL)
 		{
-			echo "4";
+			$Result[0] = ErrIds::cErrInputCompany;
+		}
+		
+		if ((isset($request_headers["If-Match"]) !== TRUE) or
+			($request_headers["If-Match"]) == NULL)
+		{
 			$Result[0] = ErrIds::cErrWrongParameter;
 		}
 		
-		/*if ((isset($request["cCity"]) !== TRUE) or
+				/*if ((isset($request["cCity"]) !== TRUE) or
 			($request["cCity"]) == NULL)
 		{
 			echo "5";
@@ -107,13 +110,6 @@ class UpdateKontaktCommand
 			echo "8";
 			$Result[0] = ErrIds::cErrWrongParameter;
 		}*/
-		
-		if ((isset($request_headers["If-Match"]) !== TRUE) or
-			($request_headers["If-Match"]) == NULL)
-		{
-			echo "9";
-			$Result[0] = ErrIds::cErrWrongParameter;
-		}
 	
 		return $Result;
 	

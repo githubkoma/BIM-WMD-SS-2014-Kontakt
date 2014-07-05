@@ -25,5 +25,10 @@
 		const  cErrDBFetch      	= 104;
 		const  cErrDBBFetchRow     	= 105;
 
+		// Fehler in Inputfeldern
+		const cErrInputNName		= 200;
+		const cErrInputVName		= 201;
+		const cErrInputCompany		= 202;
+		
 	}
 ?>

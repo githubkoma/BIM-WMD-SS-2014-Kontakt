@@ -1,5 +1,5 @@
 $.widget("kontakt.kontaktDetails", 
-{  			// Definiton des Widgets mit Name ""
+{  	// Definiton des Widgets mit Name ""
     load: function(kontaktUri)
 	{		
 		$.ajax(
@@ -27,9 +27,10 @@ $.widget("kontakt.kontaktDetails",
 		this.element.find(".updtdate").text(kontakt.cUpdtDate);
 		this.element.find(".updtuser").text(kontakt.cUpdtUser);
 		//this.element.find(".age").text(kontakt.cAge);  ? wird doch berechnet ? sollte dies nciht im Client passieren ?
-		this.element.click(kontakt.url, function(event)
+		/* this.element.click(kontakt.url, function(event)
 			{
 				that._trigger("onKontaktClicked", null, event.data);
 			});
+		*/
     }
 });

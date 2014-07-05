@@ -5,7 +5,7 @@ $(function() {
 	// .ajaxError: speziell bei Fehlern in HTTP Kommunikation
 	$(document).ajaxError(function(event, request)
 	{	
-		if (request.status!==400) 
+		if (request.status==400) 
 		{
 			return; // Spaghetti = True;
 		}
@@ -39,7 +39,14 @@ $(function() {
 		onShowKontakteClicked: function() {
 			$("#kontakt_liste").show();
 			$("#kontakt_details").hide();
+			$("#kontakt_liste").kontaktListe("reload");
 		},
+		
+		onCreateKontaktClicked: function() {
+			$("#kontakt_liste").show();
+			$("#kontakt_details").hide();
+			$("#create_dialog").createDialog("open");
+		}
 	}
 	);
 	
@@ -64,7 +71,9 @@ $(function() {
 		onEditKontaktClicked: function(event, kontakt)
 			{
 				//alert("in application.js");
+				//$("#edit_dialog").show();
 				$("#edit_dialog").editDialog("open",kontakt);
+				
 			}
 						
 		});
@@ -83,17 +92,26 @@ $(function() {
 	
 	$("#kontakt_details").kontaktDetails(
 	{
-		onKontaktClicked: function(event,url)
+		/*onKontaktClicked: function(event,url)
 		{
 			$("#kontakt_details").hide();
 			$("#kontakt_liste").show();
-			//$("#kontakt_liste").kontaktListe("reload"); //,url);
-		}	
+			$("#kontakt_liste").kontaktListe("reload"); //,url);
+		}	*/
 	});
 	
 	$("#edit_dialog").editDialog(
 	{		
 		onKontaktUpdated: function()
+		{
+			alert("success: geupdated");
+			$("#kontakt_list").kontaktListe("reload");
+		}
+	});
+	
+	$("#create_dialog").createDialog(
+	{		
+		onKontaktCreated: function()
 		{
 			alert("success: geupdated");
 			$("#kontakt_list").kontaktListe("reload");

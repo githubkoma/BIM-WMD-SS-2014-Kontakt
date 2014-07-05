@@ -1,4 +1,4 @@
-$.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
+$.widget("kontakt.createDialog", $.ui.dialog, // Standard Template für Dialog
 {  
   options: 
   {
@@ -9,22 +9,14 @@ $.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
   },
   
   // Methode "Open" ist für den Typ "Dialog" schon vordefiniert->überschreiben
-  open: function(kontakt)
+  open: function()
   {
-	this._kontakt = kontakt; // Klassen-Attribut als temporäre Variable nutzen
+	//this._kontakt = kontakt; // Klassen-Attribut als temporäre Variable nutzen
 	
 	this.element.find(".validation_message").empty();
 	this.element.find("#nname_field").removeClass("ui-state-error");
 	this.element.find("#vname_field").removeClass("ui-state-error");
 	this.element.find("#company_field").removeClass("ui-state-error");
-	
-	this.element.find("#nname_field").val(kontakt.cNName); 
-	this.element.find("#vname_field").val(kontakt.cVName); 
-	this.element.find("#company_field").val(kontakt.cCompany);
-	this.element.find("#phone_field").val(kontakt.cPhone); 
-	this.element.find("#city_field").val(kontakt.cCity); 
-	this.element.find("#mail_field").val(kontakt.cMail);
-	this.element.find("#birthday_field").val(kontakt.cBirthDay);
 	
 	this._super(); // "Open" der Basisklasse aufrufen, um Dialog zu öffnen
 	
@@ -49,7 +41,7 @@ $.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
 		text: "Ok",
 		click: function()
 		{
-			that._updateKontakt();
+			that._insertKontakt();
 			//that.close();
 		}
 	}];
@@ -57,7 +49,7 @@ $.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
 	  this._super();
   },
   
-  _updateKontakt: function()
+  _insertKontakt: function()
   {
 
 	var kontakt = {	// <- dies ist eine Javascript Klasse
@@ -72,14 +64,14 @@ $.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
 	
 	$.ajax
 	({
-		type: "PUT",
-		url: this._kontakt.url,
-		headers: {"If-Match": this._kontakt.cVersion},
+		type: "POST",
+		url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
+		//headers: {"If-Match": this._kontakt.cVersion},
 		data: kontakt,
 		success: function()
 		{
 			//alert(kontakt);
-			this._trigger("onKontaktUpdated");
+			this._trigger("onKontaktCreated");
 			this.close();
 		},
 		error: function(request)
