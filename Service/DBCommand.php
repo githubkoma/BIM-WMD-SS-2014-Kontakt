@@ -45,7 +45,7 @@
 			$Result[1] = $this->gLink->close();
 			if ($Result[1] == FALSE)
 			{
-				$Result[0] = ErrIds::cErrClose;
+				$Result[0] = ErrIds::cErrDBClose;
 			}
 			return $Result;
 		}	

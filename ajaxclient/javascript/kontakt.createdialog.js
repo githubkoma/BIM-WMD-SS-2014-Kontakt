@@ -69,7 +69,7 @@ $.widget("kontakt.createDialog", $.ui.dialog, // Standard Template für Dialog
 		cPhone: this.element.find("#crt_phone_field").val(),
 		cCity: this.element.find("#crt_city_field").val(),
 		cMail: this.element.find("#crt_mail_field").val(),
-		cBirthday: this.element.find("#crt_birthday_field").val()
+		cBirthDay: this.element.find("#crt_birthday_field").val()
 	};
 	
 	$.ajax
