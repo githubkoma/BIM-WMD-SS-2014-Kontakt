@@ -15,8 +15,8 @@ $.widget("kontakt.kontaktDetails",
 	{
 		var that = this;
 		//alert(kontakt);
-		this.element.find(".nname").text(kontakt.cVName);
-		this.element.find(".vname").text(kontakt.cNName);
+		this.element.find(".nname").text(kontakt.cNName);
+		this.element.find(".vname").text(kontakt.cVName);
 		this.element.find(".company").text(kontakt.cCompany);
 		this.element.find(".city").text(kontakt.cCity);
 		var dateFormat = kontakt.cBirthDay;
