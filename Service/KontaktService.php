@@ -202,35 +202,34 @@
 		}
 		
 		//Anzahl der Seiten ermitteln
-		public function maxPageCnt(&$maxPages)
+		public function maxPageCnt($sqlElemPage)
 		{
+		    $maxElem = 0;
 			$Result[0] = ErrIds::cOK;
 			
 			$objDBcommand = new DBCommand();
 			$Result = $objDBcommand->dbConnect();
-			
 			if ($Result[0] == ErrIds::cOK)
 			{			
 				$sqlState = "SELECT COUNT(*) 
 							 FROM " . $objDBcommand->gTable . ";";
 				
 				$Result = $objDBcommand->dbQuery($sqlState);
-				
 				if  ($Result[0] == ErrIds::cOK)
 				{
-					$Result[1] = $objDBcommand->dbFetchRow($resSet,$dbRec);
+					$queryOnly = $Result[1];
+					$Result = $objDBcommand->dbFetchRow($queryOnly);
 					if  ($Result[0] == ErrIds::cOK)
 					{
-						$dbRec 	  = $dbRec[0];
-						$maxPages = ceil($dbRec / $sqlLimitTo); 
+						$maxElem = $Result[1];
+						$maxElem = $maxElem[0];
+						$Result[1] = ceil($maxElem / $sqlElemPage); 
 					}
 				}
-			}
-			
 			$objDBcommand->dbClose();
+			}
 			return $Result;
 		}
-	
 	}
 
 ?>

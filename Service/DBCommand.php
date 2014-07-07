@@ -84,6 +84,7 @@
 		
 		public function dbFetchRow($query)
 		{
+			$Result[0] =  ErrIds::cOK;
 			
 			$Result[1] = $query->fetch_row();
 			if  ($Result[1] === FALSE)

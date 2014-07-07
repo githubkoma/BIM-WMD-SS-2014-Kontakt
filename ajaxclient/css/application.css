@@ -59,7 +59,7 @@ a:active {
 }
 
 #kontakt_details .vname, #kontakt_details .company, #kontakt_details .phone, #kontakt_details .mail, #kontakt_details .age, #kontakt_details .city, #kontakt_details .birthday {
-  display: block;
+  /*display: block;*/
   margin-top: 5px;
 }
 

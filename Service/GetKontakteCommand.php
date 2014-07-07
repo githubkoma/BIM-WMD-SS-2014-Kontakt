@@ -5,17 +5,18 @@
 
 	class GetKontakteCommand 
 	{
-		private $Result = array();	
+		private $Result = array();		
 		
 		public function execute($request,$requestHeaders)
 		{
 			//Initialisieren
 			$Result[0] = ErrIds::cOK;	
 					
-			$sqlLimitFrom = 0;
-			$sqlLimitTo = 20;
-			$sqlOrderBy = "cNName"; ;
-			$sqlOrderDir = "ASC";			
+			$sqlLimitFrom 	= 0;
+			$sqlLimitTo 	= 10;
+			$sqlElemPage 	= 10;
+			$sqlOrderBy 	= "cNName"; ;
+			$sqlOrderDir 	= "ASC";			
 			
 			$objKontaktService = new KontaktService();
 			
@@ -28,8 +29,15 @@
 				foreach ($Result[1] as $Kontakt)
 				{
 					$Kontakt->url = "/ProjectDebug/Service/Kontakte/$Kontakt->cId";
+					
 					unset($Kontakt->cId);
 				}
+				
+				$PageResult = $objKontaktService->maxPageCnt($sqlElemPage);
+				if  (($PageResult[0] == errIds::cOK) and ($PageResult[1] > 0))
+				{				
+					header("PageSize: $PageResult[1]");
+				};
 			}
 			return $Result;	
 		}
