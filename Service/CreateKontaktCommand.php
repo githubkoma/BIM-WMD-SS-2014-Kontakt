@@ -49,51 +49,46 @@ class CreateKontaktCommand
 		$Result[0] = ErrIds::cOK;
 		
 		// Formale Prüfung der Requestsfelder
-		if ((isset($request["cVName"]) !== TRUE) or
-			($request["cVName"]) == NULL)
-		{
-			$Result[0] = ErrIds::cErrInputVName;
-		}
-		
 		if ((isset($request["cNName"]) !== TRUE) or
 			($request["cNName"]) == "")
 		{
 			$Result[0] = ErrIds::cErrInputNName;
+			return $Result;
+		}
+
+		if ((isset($request["cVName"]) !== TRUE) or
+			($request["cVName"]) == NULL)
+		{
+			$Result[0] = ErrIds::cErrInputVName;
+			return $Result;
 		}
 		
 		if ((isset($request["cCompany"]) !== TRUE) or
 			($request["cCompany"]) == NULL)
 		{
 			$Result[0] = ErrIds::cErrInputCompany;
+			return $Result;
 		}
 
-		/*if ((isset($request["cCity"]) !== TRUE) or
-			($request["cCity"]) == NULL)
+		if (isset($request["cCity"]) !== TRUE)
 		{
-			echo "5";
 			$Result[0] = ErrIds::cErrWrongParameter;
 		}
 		
-		if ((isset($request["cBirthDay"]) !== TRUE) or
-			($request["cBirthDay"]) == NULL)
+		if (isset($request["cBirthDay"]) !== TRUE)
 		{
-			echo "6";
 			$Result[0] = ErrIds::cErrWrongParameter;
 		}
 		
-		if ((isset($request["cMail"]) !== TRUE) or
-			($request["cMail"]) == NULL)
+		if (isset($request["cMail"]) !== TRUE)
 		{
-			echo "7";
 			$Result[0] = ErrIds::cErrWrongParameter;
 		}
 		
-		if ((isset($request["cPhone"]) !== TRUE) or
-			($request["cPhone"]) == NULL)
+		if (isset($request["cPhone"]) !== TRUE)
 		{
-			echo "8";
 			$Result[0] = ErrIds::cErrWrongParameter;
-		}*/
+		}
 	
 		return $Result;
 	

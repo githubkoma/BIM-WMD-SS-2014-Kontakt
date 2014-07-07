@@ -32,11 +32,49 @@ $.widget("kontakt.kontaktDetails",
 		var dateFormat = $.datepicker.formatDate('dd.mm.yy', new Date(dateFormat));
 		this.element.find(".updtdate").text(dateFormat);	
 		this.element.find(".updtuser").text(kontakt.cUpdtUser);
-		//this.element.find(".age").text(kontakt.cAge);  ? wird doch berechnet ? sollte dies nciht im Client passieren ?
-		/* this.element.click(kontakt.url, function(event)
+		
+		wAge = this.computeAge(kontakt.cBirthDay);
+		this.element.find(".age").text(wAge);
+    },
+	
+	computeAge: function(bDate)
+	{	
+		var wAge = "";
+		
+		var wBDate = new Date(bDate);
+		wBYear  = wBDate.getFullYear();
+		wBMonth = wBDate.getMonth() + 1; //Warum auch immer ??? sonst fehlt ein Monat!
+		wBDay   = wBDate.getDate();
+		
+		if  (((wBDay > 0) && (wBDay < 32)) && ((wBMonth > 0) && (wBMonth < 13)) && (wBYear > 1900))
+		{
+			today = new Date();	
+			
+			wdiffday 	= today.getDate()  	- wBDay;
+			wdiffmonth 	= (today.getMonth() + 1)  - wBMonth;
+			wdiffyear 	= today.getFullYear() - wBYear;
+			
+			if (wdiffday < 0)
 			{
-				that._trigger("onKontaktClicked", null, event.data);
-			});
-		*/
-    }
+				wdiffday = 30 + wdiffday;
+				wdiffmonth--;
+			};
+			
+			if (wdiffmonth < 0)
+			{
+				wdiffmonth = 12 + wdiffmonth;
+				wdiffyear--;
+			};
+			if  (wdiffyear < 0)
+			{
+				wdiffyear = 0;
+			};
+			
+			wAge   = wdiffyear + ' Jahre ' +
+						'- ' + wdiffmonth + ' Monat(e) ' +
+						'- ' + wdiffday + ' Tag(e)';
+		
+		};
+		return wAge;
+	},
 });

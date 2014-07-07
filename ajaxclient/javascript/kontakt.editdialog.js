@@ -62,7 +62,15 @@ $.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
   
   _updateKontakt: function()
   {
-
+	var wDateParts = this.element.find("#birthday_field").val().split('.');
+	if  (wDateParts == "")
+	{
+		wDateParts[0] = "00";
+		wDateParts[1] = "00";
+		wDateParts[2] = "0000";
+	};
+	wnDate = wDateParts[2] + "-" + wDateParts[1] + "-" + wDateParts[0];
+	
 	var kontakt = {	// <- dies ist eine Javascript Klasse
 		cNName: this.element.find("#nname_field").val(),
 		cVName: this.element.find("#vname_field").val(),
@@ -70,7 +78,7 @@ $.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
 		cPhone: this.element.find("#phone_field").val(),
 		cCity: this.element.find("#city_field").val(),
 		cMail: this.element.find("#mail_field").val(),
-		cBirthDay: this.element.find("#birthday_field").val()
+		cBirthDay: wnDate,
 	};
 	
 	$.ajax

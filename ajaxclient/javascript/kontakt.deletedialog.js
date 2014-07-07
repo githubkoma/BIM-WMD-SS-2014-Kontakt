@@ -45,6 +45,7 @@ $.widget("kontakt.deleteDialog", $.ui.dialog,
 	{
 		type: "DELETE",
 		url: this._kontakt.url,
+		headers: {"If-Match": this._kontakt.cVersion},
 		success: function()
 		{
 			this._trigger("onKontaktDeleted");

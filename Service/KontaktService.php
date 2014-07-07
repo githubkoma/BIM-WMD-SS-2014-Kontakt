@@ -103,7 +103,7 @@
 								"cBirthDay = '$objKontakt->cBirthDay', " .
 								"cCity = '$objKontakt->cCity', " .
 								"cMail = '$objKontakt->cMail', " .
-								"cPhone = '$objKontakt->cMail', " .
+								"cPhone = '$objKontakt->cPhone', " .
 								"cCompany = '$objKontakt->cCompany', " .
 								"cVersion = 1" . 
 							";";
@@ -118,7 +118,7 @@
 			return $Result;
 		}
 	
-		public function deleteKontakt($id)
+		public function deleteKontakt($objKontakt)
 		{	
 			$Result[0] = ErrIds::cOK;
 			
@@ -127,25 +127,33 @@
 			if ($Result[0] == ErrIds::cOK)
 			{
 				// Prüfen, ob der Datensatz überhaupt besteht
-				$Result = $this->readKontakt($id);
+				$Result = $this->readKontakt($objKontakt->cId);
 				if ($Result[0] == ErrIds::cOK)
-				{		$sqlState = 
-						"DELETE FROM " . $objDBcommand->gTable . " " . 
-						"WHERE cId = " . $id .
-						";";
-					 
-						echo $sqlState;
+				{		
+					// Datensatz darf sich zwischenzeitlich nicht geändert haben
+					If ($Result[1]->cVersion == $objKontakt->cVersion)
+					{
+						$sqlState = 
+							"DELETE FROM " . $objDBcommand->gTable . " " . 
+							"WHERE cId = " . $objKontakt->cId .
+							";";
+						
+							//echo $sqlState;
 					
-						$Result = $objDBcommand->dbQuery($sqlState);			
-				}				
+							$Result = $objDBcommand->dbQuery($sqlState);
+					} else
+					{
+						$Result[0] = ErrIds::cErrRecordChanged;
+					}
+					
+				} else 
+				{
+					$Result[0] = ErrIds::cErrRecordNotFound;
+				}
 				
 				$objDBcommand->dbClose();
-
 			}
-		
 			return $Result;
-		
-			
 		}
 		
 		public function updateKontakt($objKontakt)
@@ -173,7 +181,7 @@
 							"cBirthDay = '$objKontakt->cBirthDay', " .
 							"cCity = '$objKontakt->cCity', " .
 							"cMail = '$objKontakt->cMail', " .
-							"cPhone = '$objKontakt->cMail', " .
+							"cPhone = '$objKontakt->cPhone', " .
 							"cCompany = '$objKontakt->cCompany', " .
 							"cVersion = cVersion + 1 " . 
 						"WHERE cId = " . $objKontakt->cId . " " .
