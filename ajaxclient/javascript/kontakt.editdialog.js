@@ -5,6 +5,7 @@ $.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
   autoOpen: false, // fenster nicht öffnen bei instanziierung
   modal: true, // modal = behält Fokus auf dem Widget, bis "ok" gedrückt wird
   width: 550,
+  width:'auto',
   show: 'clip'
   },
   
