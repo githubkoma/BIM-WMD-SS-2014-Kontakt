@@ -10,107 +10,100 @@
 		public function getError($errCode)
 		{
 			global $link;
-		
+			$ErrMessage = array();
+			
 			switch ($errCode)
 			{
+				case ErrIds::cOK:
+					 header("HTTP/1.1 200");
+					 break;	
 				case ErrIds::cNOK:
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "NotExecute";
+					 $ErrMessage = "NotExecute";
 					 break;
 				case ErrIds::cErrRecordChanged:
-					 header("HTTP/1.1 412");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "RecordChanged: " . $errCode;				 
+					 $ErrMessage = "RecordChanged";
+					 header("HTTP/1.1 400");
 					 break;	
 				case ErrIds::cErrRecordNotFound:
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "RecordNotFound: " . $errCode;
+					 $ErrMessage = "RecordNotFound";
 					 header("HTTP/1.1 404");
 					 break;
 				case ErrIds::cErrWrongData:
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "Wrong or missing Data: " . $errCode;
+					 $ErrMessage = "Wrong or missing Data";
+					 header("HTTP/1.1 404");
 					 break;
 				case ErrIds::cErrTableEmpty:
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "Empty Table" . $errCode;
+				     header("HTTP/1.1 400");
+					 $ErrMessage = "Empty Table";
 					 break;
 			    case ErrIds::cErrPageNotFound:
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "PageNotFound";
+					 header("HTTP/1.1 404");
+					 $ErrMessage = "PageNotFound";
 					 break;				
 				case ErrIds::cErrInvalidRequest:
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "InvalidRequest";
+					 header("HTTP/1.1 400");
+					 $ErrMessage = "InvalidRequest";
 					 break;
 				case ErrIds::cErrServerError:
-					 header("HTTP/1.1 500");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "ServerError";
+					 header("HTTP/1.1 501");
+					 $ErrMessage = "ServerError";
 					 break;
 				case ErrIds::cErrUndefClass:
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "Undefined Class: " . $errCode;
+					 header("HTTP/1.1 501");
+					 $ErrMessage = "Undefined Class";
 					 break;
 				case ErrIds::cErrWrongParameter:
+					 $ErrMessage = "Wrong Parameter";
 					 header("HTTP/1.1 400");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "Wrong Parameter: " . $errCode;
 					 break;
 				case ErrIds::cErrDBConnect:
 					 header("HTTP/1.1 500");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "Connect failed: " . $link->connect_error . ": " . $link->connect_errno;
+					 $ErrMessage = "Connect failed";
 					 break;
 				case ErrIds::cErrDBClose:
 					 header("HTTP/1.1 500");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "Close failed: " . $errCode;
+					 $ErrMessage = "Close failed";
 					 break;
 				case ErrIds::cErrDBCharset:
 					 header("HTTP/1.1 500");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "Charset failed: " . $errCode;
+					 $ErrMessage = "Charset failed";
 					 break;
 				case ErrIds::cErrDBQuery:
 					 header("HTTP/1.1 500");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "Query failed: " . $errCode;
+					 $ErrMessage = "Query failed";
 					 break;
 				case ErrIds::cErrDBFetch:
 					 header("HTTP/1.1 500");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "FetchObject failed: " . $errCode;
+					 $ErrMessage = "FetchObject failed";
 					 break;
 				case ErrIds::cErrDBBFetchRow:
 					 header("HTTP/1.1 500");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "FetchRow failed: " . $errCode;
+					 $ErrMessage = "FetchRow failed";
 					 break;
-				
 				
 				case ErrIds::cErrInputNName:
 					 header("HTTP/1.1 400");
-					 $ErrMessage = array();
+					
 					 $ErrMessage["nname"] = "Fehler in Eingabe: Nachname";
+					 //$ErrMessage = "Fehler in Nachname: " . $errCode;
 					 break;
 				
 				case ErrIds::cErrInputVName:
 					 header("HTTP/1.1 400");
-					 $ErrMessage = array();
+					 
 					 $ErrMessage["vname"] = "Fehler in Eingabe: Vorname";
+					 //$ErrMessage = "Fehler in Vorname: " . $errCode;
 					 break;
 				case ErrIds::cErrInputCompany:
 					 header("HTTP/1.1 400");
-					 $ErrMessage = array();
+					 
 					 $ErrMessage["company"] = "Fehler in Eingabe: Firma";
+					 $ErrMessage = "Fehler in Firma " . $errCode;
 					 break;
 				
 				default: 
-					 header("HTTP/1.1 500");
-					 $ErrMessage = array();
-					 $ErrMessage["error"] = "unknown Error: " . $errCode;
-					 break;
+					$ErrMessage = "unknown Error: " . $errCode;
+					break;
 			}
 			return $ErrMessage;
 		}

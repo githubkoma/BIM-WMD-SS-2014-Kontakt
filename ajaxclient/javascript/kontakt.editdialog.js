@@ -81,51 +81,66 @@ $.widget("kontakt.editDialog", $.ui.dialog, // Standard Template für Dialog
 		cBirthDay: wnDate,
 	};
 	
-	$.ajax
-	({
-		type: "PUT",
-		url: this._kontakt.url,
-		headers: {"If-Match": this._kontakt.cVersion},
-		data: kontakt,
-		success: function()
+	//Änderunng stattgefunden!?!
+	if  ((this._kontakt.cNName != kontakt.cNName) || (this._kontakt.cVName != kontakt.cVName) ||
+		(this._kontakt.cCompany != kontakt.cCompany) || (this._kontakt.cPhone != kontakt.cPhone) || 
+		(this._kontakt.cCity != kontakt.cCity) || (this._kontakt.cMail != kontakt.cMail) || 
+		(this._kontakt.cBirthDay != kontakt.cBirthDay))
+	{
+		this._callAjax(kontakt);
+	} else
 		{
-			//alert(kontakt);
-			this._trigger("onKontaktUpdated");
 			this.close();
-		},
-		error: function(request)
-		{
-			this.element.find(".validation_message").empty();
-			this.element.find("#nname_field").removeClass("ui-state-error");
-			this.element.find("#vname_field").removeClass("ui-state-error");
-			this.element.find("#company_field").removeClass("ui-state-error");
-			if (request.status==400) 
+		};
+  },
+  
+  _callAjax: function(kontakt)
+  {	
+		$.ajax
+		({
+			type: "PUT",
+			url: this._kontakt.url,
+			headers: {"If-Match": this._kontakt.cVersion},
+			data: kontakt,
+			success: function()
 			{
-				var validationMessages = $.parseJSON(request.responseText);
-				if (validationMessages.nname)
+				//alert(kontakt);
+				this._trigger("onKontaktUpdated");
+				this.close();
+			},
+			error: function(request)
+			{
+				this.element.find(".validation_message").empty();
+				this.element.find("#nname_field").removeClass("ui-state-error");
+				this.element.find("#vname_field").removeClass("ui-state-error");
+				this.element.find("#company_field").removeClass("ui-state-error");
+				if (request.status==400) 
 				{
-					alert(validationMessages);
-					this.element.find(".validation_message").text(validationMessages.nname);
-					this.element.find("#nname_field").addClass("ui-state-error").focus();
+					var validationMessages = $.parseJSON(request.responseText);
+					if (validationMessages.nname)
+					{
+						//alert(validationMessages);
+						this.element.find(".validation_message").text(validationMessages.nname);
+						this.element.find("#nname_field").addClass("ui-state-error").focus();
+					}
+					
+					if (validationMessages.vname)
+					{
+						//alert(validationMessages);
+						this.element.find(".validation_message").text(validationMessages.vname);
+						this.element.find("#vname_field").addClass("ui-state-error").focus();
+					}
+					
+					if (validationMessages.company)
+					{
+						//alert(validationMessages);
+						this.element.find(".validation_message").text(validationMessages.company);
+						this.element.find("#company_field").addClass("ui-state-error").focus();
+					}
+					
 				}
-				
-				if (validationMessages.vname)
-				{
-					alert(validationMessages);
-					this.element.find(".validation_message").text(validationMessages.vname);
-					this.element.find("#vname_field").addClass("ui-state-error").focus();
-				}
-				
-				if (validationMessages.company)
-				{
-					alert(validationMessages);
-					this.element.find(".validation_message").text(validationMessages.company);
-					this.element.find("#company_field").addClass("ui-state-error").focus();
-				}
-				
-			}
-		},
-		context: this
-	});
+			},
+			context: this
+		});
   }
 });

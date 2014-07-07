@@ -64,7 +64,7 @@ a:active {
 }
 
 #kontakt_details .crtdate, #kontakt_details .crtuser, #kontakt_details .updtdate, #kontakt_details .updtuser {
-  display: block;
+  /*display: block;*/
   margin-top: 5px;
 }
 

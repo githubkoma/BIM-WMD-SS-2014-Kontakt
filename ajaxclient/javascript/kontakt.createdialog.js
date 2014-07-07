@@ -104,21 +104,21 @@ $.widget("kontakt.createDialog", $.ui.dialog, // Standard Template für Dialog
 				var validationMessages = $.parseJSON(request.responseText);
 				if (validationMessages.nname)
 				{
-					alert(validationMessages);
+					//alert(validationMessages);
 					this.element.find(".validation_message").text(validationMessages.nname);
 					this.element.find("#crt_nname_field").addClass("ui-state-error").focus();
 				}
 				
 				if (validationMessages.vname)
 				{
-					alert(validationMessages);
+					//alert(validationMessages);
 					this.element.find(".validation_message").text(validationMessages.vname);
 					this.element.find("#crt_vname_field").addClass("ui-state-error").focus();
 				}
 				
 				if (validationMessages.company)
 				{
-					alert(validationMessages);
+					//alert(validationMessages);
 					this.element.find(".validation_message").text(validationMessages.company);
 					this.element.find("#crt_company_field").addClass("ui-state-error").focus();
 				}

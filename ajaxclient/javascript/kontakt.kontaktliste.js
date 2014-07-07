@@ -20,9 +20,9 @@ $.widget("kontakt.kontaktListe",
   	
 	reload: function()
 	{
-		//this.element.find(".kontakt:not(.template)").remove();
-		KontaktButNotTemplate = this.element.find(".kontakt:not(.template)");
-		KontaktButNotTemplate.remove();
+		this.element.find(".kontakt:not(.template)").remove();
+		//KontaktButNotTemplate = this.element.find(".kontakt:not(.template)");
+		//KontaktButNotTemplate.remove();
 		//console.debug(abc);
 		
 		this._load();

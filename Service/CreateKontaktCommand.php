@@ -19,8 +19,6 @@ class CreateKontaktCommand
 			//objKontakt->cCrtUser = $_SERVER["PHP_AUTH_USER"];
 			//Passwort: $_SERVER["PHP_AUTH_PW"];
 			
-			var_dump($request);
-			
 			$objKontakt->cVName = $request["cVName"];
 			$objKontakt->cNName = $request["cNName"];
 			$objKontakt->cCompany = $request["cCompany"];
@@ -32,11 +30,8 @@ class CreateKontaktCommand
 			$Result = $objKontaktService->createKontakt($objKontakt);
 			if ($Result[0] == ErrIds::cOK)
 			{
-				$objKontakt->url = "/BIM-WMD-SS-2014/Service/Kontakte";
-				//$TempURL = $objKontakt->url;
-				header("Location: $objKontakt->url");
-				header("HTTP/1.1 201");
-				unset($objKontakt->cId);			
+				header("Location: /BIM-WMD-SS-2014/Service/Kontakte");
+				header("HTTP/1.1 201");				
 			}
 			
 		}

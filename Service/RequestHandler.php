@@ -59,11 +59,12 @@
 			if ($Result[0] == ErrIds::cOK)
 			{
 				$Result = $cmd->execute($request, $request_headers);
-				if ($Result[0] == ErrIds::cOK)
+				if  ($Result[0] == ErrIds::cOK) 
 				{
 					if  ($Result[1] !== NULL) 
 					{
 						//Formatierung in JSON-Zeichenkette
+						//header("HTTP/1.1 200");
 						echo(json_encode($Result[1]));						
 					}
 				}
@@ -71,12 +72,11 @@
 			
 			// Fehlerbehandlung -> Auswerten, Ausgeben, HTTP Header setzen 
 			If ($Result[0] !== ErrIds::cOK) 
-			{			
-				$errText = array();
+			{					
 				$errText = $errObj->getError($Result[0]);
-				//var_dump("ErrorCode:",$Result[0]," ",$errText);
-				//var_dump("Message: ",$errObj->validationMessage);
 				echo(json_encode($errText));
+				//var_dump("ErrorCode:",$Result[0]," ",$errText);
+				//var_dump("Message: ",$errObj->validationMessage);	
 			}
 		}
 	}		

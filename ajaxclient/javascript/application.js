@@ -12,11 +12,11 @@ $(function() {
 	
 		//alert(request.statusText); // Status aus Server-Response
 		$("#error_dialog").errorDialog("open", request.statusText);
-		$("#kontakt_liste").show();
-		$("#kontakt_details").hide();
-		
+	
 		if (request.status==404) 
 		{		
+			$("#kontakt_liste").show();
+			$("#kontakt_details").hide();
 			$("#kontakt_liste").kontaktListe("reload");
 		}
 		
@@ -92,20 +92,14 @@ $(function() {
 	
 	$("#kontakt_details").kontaktDetails(
 	{
-		/*onKontaktClicked: function(event,url)
-		{
-			$("#kontakt_details").hide();
-			$("#kontakt_liste").show();
-			$("#kontakt_liste").kontaktListe("reload"); //,url);
-		}	*/
 	});
 	
 	$("#edit_dialog").editDialog(
 	{		
 		onKontaktUpdated: function()
 		{
-			alert("success: geupdated");
-			$("#kontakt_list").kontaktListe("reload");
+			//alert("success: geupdated");
+			$("#kontakt_liste").kontaktListe("reload");
 		}
 	});
 	
@@ -113,8 +107,8 @@ $(function() {
 	{		
 		onKontaktCreated: function()
 		{
-			alert("success: created");
-			$("#kontakt_list").kontaktListe("reload");
+			//alert("success: created");
+			$("#kontakt_liste").kontaktListe("reload");
 		}
 	});
 	

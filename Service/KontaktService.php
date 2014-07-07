@@ -27,13 +27,12 @@
 				{
 					// Kontaktobjekt als Ergebnis fetchen
 					$queryOnly = $Result[1];
-					$Result = $objDBcommand->dbFetch($queryOnly);	
-
+					$Result = $objDBcommand->dbFetch($queryOnly);
+					//unset($Result[1]->cId);					
 				}				
 				$objDBcommand->dbClose();				
 			}
-
-			unset($Result[1]->id);
+			
 			return $Result;
 			
 		}
@@ -78,9 +77,13 @@
 						$Result[1] = $arrKontaktObjekte;
 					}									
 				}				
+				$objDBcommand->dbClose();
 			}
-			$objDBcommand->dbClose();
-			
+			if  ($Result[1] == NULL)
+			{
+				$Result[0] = ErrIds::cErrTableEmpty;
+			};
+						
 			return $Result;
 		} 	
 		
@@ -108,13 +111,9 @@
 								"cVersion = 1" . 
 							";";
 						
-				echo $sqlState;
-						
 				$Result = $objDBcommand->dbQuery($sqlState);
 				$objDBcommand->dbClose();
-
 			}
-		
 			return $Result;
 		}
 	
@@ -150,10 +149,9 @@
 				{
 					$Result[0] = ErrIds::cErrRecordNotFound;
 				}
-				
 				$objDBcommand->dbClose();
 			}
-			return $Result;
+			return $Result;		
 		}
 		
 		public function updateKontakt($objKontakt)
@@ -186,9 +184,7 @@
 							"cVersion = cVersion + 1 " . 
 						"WHERE cId = " . $objKontakt->cId . " " .
 						";";
-															  
-						echo $sqlState;
-								
+																						
 						$Result = $objDBcommand->dbQuery($sqlState);
 
 					} else
@@ -220,8 +216,6 @@
 				
 				$Result = $objDBcommand->dbQuery($sqlState);
 				
-				var_dump($Result);
-				
 				if  ($Result[0] == ErrIds::cOK)
 				{
 					$Result[1] = $objDBcommand->dbFetchRow($resSet,$dbRec);
@@ -231,7 +225,6 @@
 						$maxPages = ceil($dbRec / $sqlLimitTo); 
 					}
 				}
-			
 			}
 			
 			$objDBcommand->dbClose();

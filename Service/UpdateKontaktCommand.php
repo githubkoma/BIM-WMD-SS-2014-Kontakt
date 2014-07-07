@@ -31,15 +31,15 @@ class UpdateKontaktCommand
 			$Result = $objKontaktService->updateKontakt($objKontakt);			
 			if ($Result[0] == ErrIds::cOK)
 			{
-				//$objKontakt->url = "/BIM-WMD-SS-2014/Service/Kontakte/$objKontakt->cId";
+				$objKontakt->url = "/BIM-WMD-SS-2014/Service/Kontakte/$objKontakt->cId";
+				$Result[1] = $objKontakt;
 				//$TempURL = $objKontakt->url;
 				//header("Location: $TempURL");
 				header("HTTP/1.1 201");
-				unset($objKontakt->cId);
+				unset($Result[1]->cId);
 			}
 			
 		}
-		
 		return $Result;
 	}			
 	
