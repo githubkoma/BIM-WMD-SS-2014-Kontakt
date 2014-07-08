@@ -13,8 +13,8 @@
 			$Result[0] = ErrIds::cOK;	
 					
 			$sqlLimitFrom 	= 0;
-			$sqlLimitTo 	= 10;
-			$sqlElemPage 	= 10;
+			$sqlLimitTo 	= 5;
+			$sqlElemPage 	= 5;
 			$sqlOrderBy 	= "cNName"; ;
 			$sqlOrderDir 	= "ASC";			
 			

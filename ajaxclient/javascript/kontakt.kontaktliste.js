@@ -9,7 +9,12 @@ $.widget("kontakt.kontaktListe",
 		   url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
 		   dataType: "json",
 		   success: this._appendKontakte,
-		   context: this
+		   context: this,
+		   complete: this._BuildPageNum,
+		   // function (response) 
+		   // {
+					// alert(response.getResponseHeader('PageSize'));
+		   // }
 		});		
 	},
 	
@@ -74,6 +79,22 @@ $.widget("kontakt.kontaktListe",
 			
 			this.element.append(kontaktElement); // Element nun in HTML anhängen		
 			
+		}
+	},
+	
+	_BuildPageNum: function(response)
+	{
+		var that = this;
+		pages = response.getResponseHeader('PageSize');
+		//alert(pages);
+		for (var i = 0; i < pages; i++) 
+		{
+			
+			var pageElement = this.element.find(".page").clone();
+			//pageElement.removeClass("templatepage");
+			var pagenum = i + 1;
+			pageElement.find(".page").text(pagenum);
+			this.element.append(pageElement);
 		}
 	}
   

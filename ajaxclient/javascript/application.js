@@ -39,6 +39,7 @@ $(function() {
 		onShowKontakteClicked: function() {
 			$("#kontakt_liste").show();
 			$("#kontakt_details").hide();
+			$("#pagesize_selector").show();
 			$("#kontakt_liste").kontaktListe("reload");
 		},
 		
@@ -58,6 +59,7 @@ $(function() {
 				$("#kontakt_details").kontaktDetails("load", kontaktUri);
 				$("#kontakt_liste").hide();
 				$("#kontakt_details").show();
+				$("#pagesize_selector").hide();
 				//alert(todoUri);
 			},
 			
@@ -80,6 +82,8 @@ $(function() {
 	
 	// Weitere Widgets instanziieren:
 	$("#error_dialog").errorDialog(); // = jQuery("error_dialog").todoList();
+	
+	//$("#pagesize_selector").kontaktListe();
 	
 	$("#delete_dialog").deleteDialog(
 	{
