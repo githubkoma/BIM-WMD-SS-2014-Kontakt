@@ -11,10 +11,7 @@ $.widget("kontakt.kontaktListe",
 		   success: this._appendKontakte,
 		   context: this,
 		   complete: this._BuildPageNum,
-		   // function (response) 
-		   // {
-					// alert(response.getResponseHeader('PageSize'));
-		   // }
+
 		});		
 	},
 	
@@ -86,12 +83,10 @@ $.widget("kontakt.kontaktListe",
 	{
 		var that = this;
 		pages = response.getResponseHeader('PageSize');
-		//alert(pages);
 		for (var i = 0; i < pages; i++) 
 		{
 			
 			var pageElement = this.element.find(".page").clone();
-			//pageElement.removeClass("templatepage");
 			var pagenum = i + 1;
 			pageElement.find(".page").text(pagenum);
 			this.element.append(pageElement);
