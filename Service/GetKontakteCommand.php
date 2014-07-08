@@ -10,17 +10,40 @@
 		public function execute($request,$requestHeaders)
 		{
 			//Initialisieren
-			$Result[0] = ErrIds::cOK;	
-					
+			$Result[0] = ErrIds::cOK;				
 			$sqlLimitFrom 	= 0;
-			$sqlLimitTo 	= 5;
-			$sqlElemPage 	= 5;
+			$sqlLimitTo 	= 20;
+			$sqlElemPage 	= 20;
 			$sqlOrderBy 	= "cNName"; ;
 			$sqlOrderDir 	= "ASC";			
 			
 			$objKontaktService = new KontaktService();
 			
-			//$Result = $objKontaktService->maxPageCnt($maxPages);
+			if ((isset($requestHeaders["RecordFrom"]) === TRUE) and
+				($requestHeaders["RecordFrom"]) != NULL)
+			{
+				$sqlLimitFrom  = $requestHeaders["RecordFrom"];
+			}
+			if ((isset($requestHeaders["RecordTo"]) === TRUE) and
+				($requestHeaders["RecordTo"]) != NULL)
+			{
+				$sqlLimitTo = $requestHeaders["RecordTo"];
+			}
+			if ((isset($requestHeaders["PageSize"]) === TRUE) and
+				($requestHeaders["PageSize"]) != NULL)
+			{
+				$sqlElemPage = $requestHeaders["PageSize"];
+			}
+			if ((isset($requestHeaders["OrderBy"]) === TRUE) and
+				($requestHeaders["OrderBy"]) != NULL)
+			{
+				$sqlOrderBy = $requestHeaders["OrderBy"];
+			}
+			if ((isset($requestHeaders["OrderDir"]) === TRUE) and
+				($requestHeaders["OrderDir"]) != NULL)
+			{
+				$sqlOrderDir = $requestHeaders["OrderDir"];
+			}
 			
 			$Result = $objKontaktService->readKontakte($sqlLimitFrom,  $sqlLimitTo, $sqlOrderBy, $sqlOrderDir);
 			
@@ -33,11 +56,17 @@
 					unset($Kontakt->cId);
 				}
 				
-				$PageResult = $objKontaktService->maxPageCnt($sqlElemPage);
-				if  (($PageResult[0] == errIds::cOK) and ($PageResult[1] > 0))
-				{				
-					header("PageSize: $PageResult[1]");
-				};
+				header("RecordFrom: $sqlLimitFrom");
+				header("ReccordTo: $sqlLimitTo");
+				
+				if  ($sqlLimitFrom = 0) //soll nur beim ersten mal mitgelifert werden
+				{
+					$PageResult = $objKontaktService->maxPageCnt($sqlElemPage);
+					if  (($PageResult[0] == errIds::cOK) and ($PageResult[1] > 0))
+					{				
+						header("PageSize: $PageResult[1]");
+					};
+				}
 			}
 			return $Result;	
 		}

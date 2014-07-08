@@ -8,9 +8,10 @@ $.widget("kontakt.kontaktListe",
 		{
 		   url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
 		   dataType: "json",
+		   headers: {"RecordFrom": 0, "RecordTo": 20, "PageSize": 20, "OrderDir": "ASC", "OderBy": "cNName"},
 		   success: this._appendKontakte,
-		   context: this,
 		   complete: this._BuildPageNum,
+		   context: this,
 
 		});		
 	},
@@ -32,8 +33,7 @@ $.widget("kontakt.kontaktListe",
    
 	_appendKontakte: function(kontakte) 
 	{	
-		var that = this;
-		
+		var that = this;	
 		//alert(kontakte.length);
 		for (var i = 0; i < kontakte.length; i++) 
 		{			

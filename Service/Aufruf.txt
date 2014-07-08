@@ -10,3 +10,8 @@ Ohne .htacces:
 Für PUT/POST/DELETE etc
 -----------------------
 Im Fiddler die HTTP METHOD simulieren
+
+
+
+http://localhost/BIM-WMD-SS-2014-Kontakt/ajaxClient
+http://localhost/BIM-WMD-SS-2014-Kontakt/mobileClient
