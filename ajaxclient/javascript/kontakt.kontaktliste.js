@@ -19,9 +19,9 @@ $.widget("kontakt.kontaktListe",
 	
   	_create: function() 
     {	// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
-		pageSize = 2;
-		recFrom = 0;
-		recTo = 2;
+		pageSize = 5;
+		recFrom  = 0;
+		recTo    = 5;
 		this._load(pageSize,recFrom,recTo);
 	},
   	
@@ -33,14 +33,14 @@ $.widget("kontakt.kontaktListe",
 		//console.debug(abc);
 		if  (pagenum > 0)
 		{
-			recTo = pagenum * 2;
-			recFrom = recTo - 2;
-			pageSize = 2;
+			recTo = pagenum * 5;
+			recFrom = recTo - 5;
+			pageSize = 5;
 		} else
 			{
-				recTo = 2;
+				recTo = 5;
 				recFrom = 0;
-				pageSize = 2;
+				pageSize = 5;
 			};		
 		this._load(pageSize,recFrom,recTo);
 	},
