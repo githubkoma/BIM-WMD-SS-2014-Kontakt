@@ -9,7 +9,6 @@
 	<script src="./javascript/jquery.blockUI.js" type="text/javascript"></script>
     <script src="./javascript/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
 	<script src="./javascript/kontakt.menubar.js" type="text/javascript"></script>
-	<script src="./javascript/kontakt.navigation.js" type="text/javascript"></script>
     <script src="./javascript/kontakt.kontaktliste.js" type="text/javascript"></script>
 	<script src="./javascript/kontakt.kontaktdetails.js" type="text/javascript"></script>
 	<script src="./javascript/kontakt.errordialog.js" type="text/javascript"></script>
@@ -237,33 +236,11 @@
       </form>
     </div>
 	
-	<div id="element_navigation">
-		<span id="elements">
-			<form action="select.htm">
-			<p>
-				Anzahl:
-				<select name="cb_elements" size="1">
-					<option>5</option>
-					<option>10</option>
-					<option>20</option>
-					<option>50</option>
-					<option>100</option>
-				</select>
-			</p>
-			</form>
+	<div id="pagesize_selector">
+		Seite:
+		<span class="pagesize templatepage">
+			<span class="page actPage"></span>
 		</span>
-		
-		<span id="navi">
-			<a href="#" class="prev_page"> zurück </a>
-			<a href="#" class="next_page"> weiter </a>
-		</span>
-		
-		<div id="pagesize_selector">
-			Seite:
-			<span class="pagesize templatepage">
-				<span class="page actPage"></span>
-			</span>
-		</div>
 	</div>
   </body>
 </html>

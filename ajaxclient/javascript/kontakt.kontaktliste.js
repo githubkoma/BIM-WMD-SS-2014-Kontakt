@@ -2,12 +2,8 @@ $.widget("kontakt.kontaktListe",
 {  
   // Javascript kennt kein private/public. Laut Programmierkonvention "soll" man
   // für private Eigenschaften mit einem _ Unterstrich beginnen
-  _load: function()
-	{
-		var recFrom = 0;
-		var recTo = 2;
-		var pageSize = 2;
-		
+  _load: function(pageSize,recFrom,recTo)
+	{	
 		$.ajax(
 		{
 		   url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
@@ -23,24 +19,30 @@ $.widget("kontakt.kontaktListe",
 	
   	_create: function() 
     {	// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
-		this._load();
+		pageSize = 2;
+		recFrom = 0;
+		recTo = 2;
+		this._load(pageSize,recFrom,recTo);
 	},
   	
-	nextload: function()
-	{
-		var recFrom = 0;
-		var recTo = this.element.find(".elements").val();
-		var pageSize = this.element.find(".elements").val();
-		//alert(recTo);
-	},
-	
-	reload: function()
+	reload: function(pagenum)
 	{
 		this.element.find(".kontakt:not(.template)").remove();	
 		//KontaktButNotTemplate = this.element.find(".kontakt:not(.template)");
 		//KontaktButNotTemplate.remove();
 		//console.debug(abc);
-		this._load();
+		if  (pagenum > 0)
+		{
+			recTo = pagenum * 2;
+			recFrom = recTo - 2;
+			pageSize = 2;
+		} else
+			{
+				recTo = 2;
+				recFrom = 0;
+				pageSize = 2;
+			};		
+		this._load(pageSize,recFrom,recTo);
 	},
    
 	_appendKontakte: function(kontakte) 
@@ -99,8 +101,8 @@ $.widget("kontakt.kontaktListe",
 		for (var i = 0; i < pages; i++) 
 		{
 			
-			var pageElement = this.element.find(".templatepage").clone();
-			pageElement.removeClass("templatepage");
+			var pageElement = this.element.find(".pagesize").clone();
+			pageElement.removeClass("pagesize");
 			var pagenum = i + 1;
 			pageElement.find(".page").text(pagenum);
 			pageElement.click(pagenum, function(event)

@@ -50,26 +50,6 @@ $(function() {
 	}
 	);
 	
-	// Navigation instanziieren
-	$("#element_navigation").navigation(
-	{
-		onPreviousPageClicked: function() {
-			$("#pagesize_selector").show();
-			$("#kontakt_liste").kontaktListe("reload");
-		},
-
-		onNextPageClicked: function() {
-			$("#pagesize_selector").show();
-			$("#kontakt_liste").kontaktListe("reload");
-		},
-		onElemPageClick: function() {
-			$("#pagesize_selector").show();
-			//$("#kontakt_liste").kontaktListe("reload",recFrom,recTo,pageSize);
-			$("#kontakt_liste").kontaktListe("nextload");
-		},	
-	}
-	);
-	
 	// HTML Element verknüpfen und Widget namens "todoList" instanziieren
 	$("#kontakt_liste").kontaktListe(
 		{
@@ -95,8 +75,7 @@ $(function() {
 				//$("#edit_dialog").show();
 				$("#edit_dialog").editDialog("open",kontakt);
 				
-			}
-						
+			}			
 		});
 	
 	// Weitere Widgets instanziieren:
@@ -106,8 +85,7 @@ $(function() {
 	{
 		onPageClicked: function(event, pagenum)
 			{
-				alert(pagenum);
-				//$("#kontakt_liste").kontaktListe("reload");
+				$("#kontakt_liste").kontaktListe("reload",pagenum);
 				
 			},
 	

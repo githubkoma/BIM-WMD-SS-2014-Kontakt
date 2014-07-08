@@ -99,9 +99,17 @@ a:active {
   margin-bottom: 15px;
 }
 
-#elements{float: right;}
-#navi{float: center;}
-#pagesize_selector {float: left;}
+#pagesize_selector {float: right;}
+.page:hover,
+.page:active {
+  text-decoration: underline;
+}
+
+.page{
+	font-weight: bold;
+	margin: 2px;
+ color: #3C71FB;
+}
 
 /*#menu_bar a {
   text-decoration: none;
