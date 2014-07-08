@@ -42,12 +42,31 @@ $(function() {
 			$("#pagesize_selector").show();
 			$("#kontakt_liste").kontaktListe("reload");
 		},
-		
 		onCreateKontaktClicked: function() {
 			$("#kontakt_liste").show();
 			$("#kontakt_details").hide();
 			$("#create_dialog").createDialog("open");
-		}
+		},
+	}
+	);
+	
+	// Navigation instanziieren
+	$("#element_navigation").navigation(
+	{
+		onPreviousPageClicked: function() {
+			$("#pagesize_selector").show();
+			$("#kontakt_liste").kontaktListe("reload");
+		},
+
+		onNextPageClicked: function() {
+			$("#pagesize_selector").show();
+			$("#kontakt_liste").kontaktListe("reload");
+		},
+		onElemPageClick: function() {
+			$("#pagesize_selector").show();
+			//$("#kontakt_liste").kontaktListe("reload",recFrom,recTo,pageSize);
+			$("#kontakt_liste").kontaktListe("nextload");
+		},	
 	}
 	);
 	
@@ -83,7 +102,16 @@ $(function() {
 	// Weitere Widgets instanziieren:
 	$("#error_dialog").errorDialog(); // = jQuery("error_dialog").todoList();
 	
-	//$("#pagesize_selector").kontaktListe();
+	$("#pagesize_selector").kontaktListe(
+	{
+		onPageClicked: function(event, pagenum)
+			{
+				alert(pagenum);
+				//$("#kontakt_liste").kontaktListe("reload");
+				
+			},
+	
+	});
 	
 	$("#delete_dialog").deleteDialog(
 	{

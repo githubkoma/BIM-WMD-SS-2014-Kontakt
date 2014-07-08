@@ -12,7 +12,7 @@ $.widget("kontakt.menuBar",
 				// Event Bubble deaktivieren und Browser-Aktion (Link verfolgen) 
 				// ausschalten. Nun kommen keine weiteren Eventhandler zum Zuge:
 				return false; 
-			}),
+			});
 			
 	this.element.find(".create_kontakt").click(function()
 			{
@@ -22,7 +22,6 @@ $.widget("kontakt.menuBar",
 				// ausschalten. Nun kommen keine weiteren Eventhandler zum Zuge:
 				return false; 
 			});
-	
 	}
  
 });

@@ -99,6 +99,10 @@ a:active {
   margin-bottom: 15px;
 }
 
+#elements{float: right;}
+#navi{float: center;}
+#pagesize_selector {float: left;}
+
 /*#menu_bar a {
   text-decoration: none;
   color: #FFFFFF;

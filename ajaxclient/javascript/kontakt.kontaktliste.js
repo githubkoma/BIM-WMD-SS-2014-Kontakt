@@ -4,11 +4,16 @@ $.widget("kontakt.kontaktListe",
   // für private Eigenschaften mit einem _ Unterstrich beginnen
   _load: function()
 	{
+		var recFrom = 0;
+		var recTo = 2;
+		var pageSize = 2;
+		
 		$.ajax(
 		{
 		   url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
 		   dataType: "json",
-		   headers: {"RecordFrom": 0, "RecordTo": 20, "PageSize": 20, "OrderDir": "ASC", "OderBy": "cNName"},
+		   //headers: {"RecordFrom": 0, "RecordTo": 2, "PageSize": 2, "OrderDir": "ASC", "OderBy": "cNName"},
+		   headers: {"RecordFrom": recFrom, "RecordTo": recTo, "PageSize": pageSize, "OrderDir": "ASC", "OderBy": "cNName"},
 		   success: this._appendKontakte,
 		   complete: this._BuildPageNum,
 		   context: this,
@@ -21,13 +26,20 @@ $.widget("kontakt.kontaktListe",
 		this._load();
 	},
   	
+	nextload: function()
+	{
+		var recFrom = 0;
+		var recTo = this.element.find(".elements").val();
+		var pageSize = this.element.find(".elements").val();
+		//alert(recTo);
+	},
+	
 	reload: function()
 	{
-		this.element.find(".kontakt:not(.template)").remove();
+		this.element.find(".kontakt:not(.template)").remove();	
 		//KontaktButNotTemplate = this.element.find(".kontakt:not(.template)");
 		//KontaktButNotTemplate.remove();
 		//console.debug(abc);
-		
 		this._load();
 	},
    
@@ -82,13 +94,19 @@ $.widget("kontakt.kontaktListe",
 	_BuildPageNum: function(response)
 	{
 		var that = this;
+
 		pages = response.getResponseHeader('PageSize');
 		for (var i = 0; i < pages; i++) 
 		{
 			
-			var pageElement = this.element.find(".page").clone();
+			var pageElement = this.element.find(".templatepage").clone();
+			pageElement.removeClass("templatepage");
 			var pagenum = i + 1;
 			pageElement.find(".page").text(pagenum);
+			pageElement.click(pagenum, function(event)
+			{
+				that._trigger("onPageClicked", null, event.data); // "Geklickt" zurückgeben
+			});
 			this.element.append(pageElement);
 		}
 	}

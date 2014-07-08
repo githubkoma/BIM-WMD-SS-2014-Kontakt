@@ -59,7 +59,7 @@
 				header("RecordFrom: $sqlLimitFrom");
 				header("ReccordTo: $sqlLimitTo");
 				
-				if  ($sqlLimitFrom = 0) //soll nur beim ersten mal mitgelifert werden
+				if  ($sqlLimitFrom == 0) //soll nur beim ersten mal mitgelifert werden
 				{
 					$PageResult = $objKontaktService->maxPageCnt($sqlElemPage);
 					if  (($PageResult[0] == errIds::cOK) and ($PageResult[1] > 0))
