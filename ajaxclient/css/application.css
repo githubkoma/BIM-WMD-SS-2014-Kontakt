@@ -46,10 +46,10 @@ a:active {
   /*display: block;*/
 }
 
-#kontakt_details .nname {
+#kontakt_details .nname, #kontakt_details .vname, #kontakt_details .company, #kontakt_details .phone, #kontakt_details .mail, #kontakt_details .age, #kontakt_details .city, #kontakt_details .birthday, #kontakt_details .crtdate, #kontakt_details .crtuser, #kontakt_details .updtdate, #kontakt_details .updtuser {
   font-size: 150%;
-  margin-top: 5px;
-  display: block;
+  /*margin-top: 5px;
+  display: block;*/
 }
 
 #kontakt_liste .actions {
