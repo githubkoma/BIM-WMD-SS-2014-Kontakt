@@ -12,9 +12,8 @@
 			//Initialisieren
 			$Result[0] = ErrIds::cOK;				
 			$sqlLimitFrom 	= 0;
-			$sqlLimitTo 	= 20;
 			$sqlElemPage 	= 20;
-			$sqlOrderBy 	= "cNName"; ;
+			$sqlOrderBy 	= "cNName";
 			$sqlOrderDir 	= "ASC";			
 			
 			$objKontaktService = new KontaktService();
@@ -23,11 +22,6 @@
 				($requestHeaders["RecordFrom"]) != NULL)
 			{
 				$sqlLimitFrom  = $requestHeaders["RecordFrom"];
-			}
-			if ((isset($requestHeaders["RecordTo"]) === TRUE) and
-				($requestHeaders["RecordTo"]) != NULL)
-			{
-				$sqlLimitTo = $requestHeaders["RecordTo"];
 			}
 			if ((isset($requestHeaders["PageSize"]) === TRUE) and
 				($requestHeaders["PageSize"]) != NULL)
@@ -44,8 +38,8 @@
 			{
 				$sqlOrderDir = $requestHeaders["OrderDir"];
 			}
-			
-			$Result = $objKontaktService->readKontakte($sqlLimitFrom,  $sqlLimitTo, $sqlOrderBy, $sqlOrderDir);
+
+			$Result = $objKontaktService->readKontakte($sqlLimitFrom,  $sqlElemPage, $sqlOrderBy, $sqlOrderDir);
 			
 			if ($Result[0] == errIds::cOK)
 			{
@@ -57,7 +51,6 @@
 				}
 				
 				header("RecordFrom: $sqlLimitFrom");
-				header("ReccordTo: $sqlLimitTo");
 				
 				if  ($sqlLimitFrom == 0) //soll nur beim ersten mal mitgelifert werden
 				{

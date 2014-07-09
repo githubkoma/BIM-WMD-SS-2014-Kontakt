@@ -37,7 +37,7 @@
 			
 		}
 		
-		public function readKontakte($sqlLimitFrom, $sqlLimitTo, 
+		public function readKontakte($sqlLimitFrom, $sqlElemPage, 
 										$sqlOrderBy,$sqlOrderDir)
 		{
 			$Result[0] = ErrIds::cOK;
@@ -53,7 +53,7 @@
 					"cMail, cPhone, cVersion " .
 				"FROM ".  $objDBcommand->gTable . " " .
 				"ORDER BY " . $sqlOrderBy . " " . $sqlOrderDir . " " .
-				"LIMIT " . $sqlLimitFrom . " , " . $sqlLimitTo . 
+				"LIMIT " . $sqlLimitFrom . " , " . $sqlElemPage . 
 				";";
 			
 				$Result = $objDBcommand->dbQuery($sqlState);

@@ -103,6 +103,7 @@ a:active {
 .page:hover,
 .page:active {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .page{
@@ -110,6 +111,11 @@ a:active {
 	margin: 2px;
  color: #3C71FB;
 }
+
+.sortOrder {
+  display: none;
+}
+
 
 /*#menu_bar a {
   text-decoration: none;

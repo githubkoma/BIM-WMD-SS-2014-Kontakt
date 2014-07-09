@@ -17,7 +17,6 @@
 	<script src="./javascript/kontakt.createdialog.js" type="text/javascript"></script>
 	<!-- Alle Javascript Klassen VOR der Mainline laden (application.js) -->
     <script src="./javascript/application.js" type="text/javascript"></script>
-
 	<script>
 		$(function()
 		{	$(".birthday").datepicker({ dateFormat: 'dd.mm.yy' });
@@ -25,16 +24,6 @@
 	</script>
 	
   </head>
-<script type='text/javascript'>
-  /*<![CDATA[*/
-    var perPage=7;
-    var numPages=6;
-    var prevText ='« Previous';
-    var nextText ='Next »';
-    var urlactivepage=location.href;
-    var home_page="/";
-  /*]]>*/
-</script>
 
   <body> 
 	<center><h1>Kontaktverwaltung</h1></center>
@@ -45,9 +34,14 @@
 	  <a href="#"><img src="images/show_kontakte.png" width="150" alt="" class="show_kontakte"></a>
 	  <a href="#"><img src="images/create_kontakt.png" width="150" alt="" class="create_kontakt"></a>
     </div>  
-    	
+	
     <div id="kontakt_liste">
 	<b>Kontakt-Liste</b>
+		<div class="sort">  
+			<a href="#"><img src="images/ButtonUp.png" width="25" class="kontakt_sort_up"></a>
+			<a href="#"><img src="images/ButtonDown.png" width="25" class="kontakt_sort_down"></a>		
+			<span class="sortOrder">ASC</span>
+		</div>  
 		<!--Kontakt-Liste -->
 		<div class="kontakt template">
 

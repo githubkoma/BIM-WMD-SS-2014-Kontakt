@@ -54,7 +54,7 @@
 			{
 				$Result[0] = ErrIds::cErrUndefClass;				
 			}
-			
+
 			// Angefordertes Kommando ausführen und Ergebnis ausgeben
 			if ($Result[0] == ErrIds::cOK)
 			{

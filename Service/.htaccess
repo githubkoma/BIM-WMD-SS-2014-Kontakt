@@ -30,5 +30,5 @@ RewriteRule ^Kontakte$ RequestHandler.php
 
 AuthType Basic
 AuthName "Kontaktverwaltung"
-AuthUserFile "C:\xampp\htdocs\GitHub\BIM-WMD-SS-2014-Kontakt\Service\.htusers"
+AuthUserFile "C:\xampp\htdocs\BIM-WMD-SS-2014-Kontakt\Service\.htusers"
 Require valid-user

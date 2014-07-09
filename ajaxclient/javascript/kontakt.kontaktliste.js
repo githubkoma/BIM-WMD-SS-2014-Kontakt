@@ -2,14 +2,13 @@ $.widget("kontakt.kontaktListe",
 {  
   // Javascript kennt kein private/public. Laut Programmierkonvention "soll" man
   // für private Eigenschaften mit einem _ Unterstrich beginnen
-  _load: function(pageSize,recFrom,recTo)
+  _load: function(pageSize=5,recFrom=0,sortOrder="ASC")
 	{	
 		$.ajax(
 		{
 		   url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
 		   dataType: "json",
-		   //headers: {"RecordFrom": 0, "RecordTo": 2, "PageSize": 2, "OrderDir": "ASC", "OderBy": "cNName"},
-		   headers: {"RecordFrom": recFrom, "RecordTo": recTo, "PageSize": pageSize, "OrderDir": "ASC", "OderBy": "cNName"},
+		   headers: {"RecordFrom": recFrom, "PageSize": pageSize, "OrderDir": sortOrder, "OderBy": "cNName"},
 		   success: this._appendKontakte,
 		   complete: this._BuildPageNum,
 		   context: this,
@@ -19,30 +18,43 @@ $.widget("kontakt.kontaktListe",
 	
   	_create: function() 
     {	// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
-		pageSize = 5;
-		recFrom  = 0;
-		recTo    = 5;
-		this._load(pageSize,recFrom,recTo);
+		var that=this;
+		this._load();
+			
+		this.element.find(".kontakt_sort_up").click(function()
+			{
+				that._trigger("onUpKontaktClicked");
+				return false; 
+			});
+	
+		this.element.find(".kontakt_sort_down").click(function()
+			{
+				that._trigger("onDownKontaktClicked");
+				return false; 
+			});	
 	},
   	
-	reload: function(pagenum)
+	reload: function(pagenum,sortOrder)
 	{
 		this.element.find(".kontakt:not(.template)").remove();	
-		//KontaktButNotTemplate = this.element.find(".kontakt:not(.template)");
-		//KontaktButNotTemplate.remove();
-		//console.debug(abc);
+		
+		if  (sortOrder != "")
+		{
+			this.element.find(".sortOrder").text(sortOrder);
+		};
+		sortOrder = this.element.find(".sortOrder").text();
+
 		if  (pagenum > 0)
 		{
-			recTo = pagenum * 5;
-			recFrom = recTo - 5;
+			recFrom = pagenum * 5 - 5;
 			pageSize = 5;
 		} else
 			{
-				recTo = 5;
 				recFrom = 0;
 				pageSize = 5;
 			};		
-		this._load(pageSize,recFrom,recTo);
+		
+		this._load(pageSize,recFrom,sortOrder);
 	},
    
 	_appendKontakte: function(kontakte) 
