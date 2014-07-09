@@ -28,7 +28,7 @@ RewriteRule ^Kontakte$ RequestHandler.php
 
 # PHP übernimmt den Body-Inhalt nur für GET und POST in $_REQUEST
 
-# AuthType Basic
-# AuthName "Todo-Liste"
-# AuthUserFile "C:\xampp\htdocs\githubkoma\Service\.htusers"
-# Require valid-user
+AuthType Basic
+AuthName "Kontaktverwaltung"
+AuthUserFile "C:\xampp\htdocs\GitHub\BIM-WMD-SS-2014-Kontakt\Service\.htusers"
+Require valid-user

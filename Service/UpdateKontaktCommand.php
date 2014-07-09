@@ -15,8 +15,8 @@ class UpdateKontaktCommand
 			$objKontaktService = new KontaktService();
 			$objKontakt = new Kontakt();
 			
-			//$objKontakt->cCrtUser = "admin2";
-			$objKontakt->cUpdtUser = "admin3";
+			//$objKontakt->cUpdtUser = "admin3";
+			$objKontakt->cUpdtUser = $_SERVER["PHP_AUTH_USER"];
 			$objKontakt->cId = $request["id"];
 			$objKontakt->cVersion = $request_headers["If-Match"];
 			
