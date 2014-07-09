@@ -22,6 +22,7 @@ $.widget("kontakt.menuBar",
 				// ausschalten. Nun kommen keine weiteren Eventhandler zum Zuge:
 				return false; 
 			});
+		
 	}
  
 });

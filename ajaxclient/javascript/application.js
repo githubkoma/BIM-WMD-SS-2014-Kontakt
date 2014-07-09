@@ -47,6 +47,7 @@ $(function() {
 			$("#kontakt_details").hide();
 			$("#create_dialog").createDialog("open");
 		},
+
 	}
 	);
 	
@@ -75,7 +76,15 @@ $(function() {
 				//$("#edit_dialog").show();
 				$("#edit_dialog").editDialog("open",kontakt);
 				
-			}			
+			},
+		onUpKontaktClicked: function() 
+			{
+				$("#kontakt_liste").kontaktListe("reload",0,"ASC");
+			},
+		onDownKontaktClicked: function() 
+			{	
+				$("#kontakt_liste").kontaktListe("reload",0,"DESC");
+			},			
 		});
 	
 	// Weitere Widgets instanziieren:
