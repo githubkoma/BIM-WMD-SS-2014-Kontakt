@@ -34,15 +34,15 @@
 	  <a href="#"><img src="images/show_kontakte.png" width="150" alt="" class="show_kontakte"></a>
 	  <a href="#"><img src="images/create_kontakt.png" width="150" alt="" class="create_kontakt"></a>
     </div>  
-	
-    <div id="kontakt_liste">
-	<b>Kontakt-Liste</b>
+	<b>Kontakt-Liste</b>	
 		<div class="sort">  
 			<a href="#"><img src="images/ButtonUp.png" width="25" class="kontakt_sort_up"></a>
 			<a href="#"><img src="images/ButtonDown.png" width="25" class="kontakt_sort_down"></a>		
 			<span class="sortOrder">ASC</span>
 		</div>
-
+		<div id="kontakt_liste">	
+		<b>____________________________________________________________________________________________________</b>
+		
 		<!--Kontakt-Liste -->
 		<div class="kontakt template">
 
@@ -236,11 +236,12 @@
 		<span class="pagesize templatepage">
 			<span class="page actPage"></span>
 		</span>
-	</div>
-		<div id="orderby_value">
+	</div>	
 		Sortierkriterium
-		<input type="checkbox" class="orderby" name="cName">Name
-		<input type="checkbox" class="orderby" name="cCompany">Firma
-	</div>
+		<span id="orderby_value">
+			<input type="radio" name="orderby" value="cName" checked="checked">Name
+			<input type="radio" name="orderby" value="cCompany">Firma
+		</span>
+	<b>____________________________________________________________________________________________________</b>
   </body>
 </html>

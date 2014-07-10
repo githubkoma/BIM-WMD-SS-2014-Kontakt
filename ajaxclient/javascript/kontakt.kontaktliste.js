@@ -33,11 +33,11 @@ $.widget("kontakt.kontaktListe",
 				return false; 
 			});	
 		
-		// this.element.find(".orderby_value").checked(function()
-			// {
-				// that._trigger("onOrderValueClicked");
-				// return false; 
-			// });		
+		this.element.find(".orderby").click(function()
+			{
+				that._trigger("onOrderValueClicked");
+				return false; 
+			});		
 	},
   	
 	reload: function(pagenum,sortOrder)
@@ -54,19 +54,14 @@ $.widget("kontakt.kontaktListe",
 		{
 			pageSize = 10;
 			recFrom = pagenum * pageSize - pageSize;
-<<<<<<< HEAD
-=======
-			
->>>>>>> origin/master
 		} else
 			{
 				recFrom = 0;
 				pageSize = 10;
 			};		
 		
-		var test = this.element.find("#orderby").val();
+		var test = this.element.find(".orderby").val();
 		alert(test);
-		
 		
 		this._load(pageSize,recFrom,sortOrder);
 	},

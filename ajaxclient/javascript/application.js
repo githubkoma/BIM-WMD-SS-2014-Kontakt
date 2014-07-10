@@ -85,10 +85,10 @@ $(function() {
 			{	
 				$("#kontakt_liste").kontaktListe("reload",0,"DESC");
 			},
-		// onOrderValueClicked: function() 
-			// {	
-				// $("#kontakt_liste").kontaktListe("reload");
-			// },			
+		onOrderValueClicked: function() 
+			{	
+				$("#kontakt_liste").kontaktListe("reload");
+			},			
 		});
 	
 	// Weitere Widgets instanziieren:
