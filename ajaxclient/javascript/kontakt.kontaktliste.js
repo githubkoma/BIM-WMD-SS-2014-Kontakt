@@ -19,7 +19,7 @@ $.widget("kontakt.kontaktListe",
   	_create: function() 
     {	// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
 		var that=this;
-		this._load(5,0,"ASC");
+		this._load(10,0,"ASC");
 			
 		this.element.find(".kontakt_sort_up").click(function()
 			{
@@ -46,12 +46,13 @@ $.widget("kontakt.kontaktListe",
 
 		if  (pagenum > 0)
 		{
-			recFrom = pagenum * 5 - 5;
-			pageSize = 5;
+			pageSize = 10;
+			recFrom = pagenum * pageSize - pageSize;
+			
 		} else
 			{
 				recFrom = 0;
-				pageSize = 5;
+				pageSize = 10;
 			};		
 		
 		this._load(pageSize,recFrom,sortOrder);
