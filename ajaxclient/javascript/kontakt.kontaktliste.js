@@ -33,7 +33,7 @@ $.widget("kontakt.kontaktListe",
 				return false; 
 			});	
 		
-		this.element.find(".orderby").click(function()
+		this.element.find(".orderby_val").click(function()
 			{
 				that._trigger("onOrderValueClicked");
 				return false; 

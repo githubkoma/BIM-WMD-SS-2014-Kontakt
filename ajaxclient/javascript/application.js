@@ -40,6 +40,7 @@ $(function() {
 			$("#kontakt_liste").show();
 			$("#kontakt_details").hide();
 			$("#pagesize_selector").show();
+			$("#orderby_value").show();
 			$("#kontakt_liste").kontaktListe("reload");
 		},
 		onCreateKontaktClicked: function() {
@@ -59,6 +60,7 @@ $(function() {
 				$("#kontakt_details").kontaktDetails("load", kontaktUri);
 				$("#kontakt_liste").hide();
 				$("#kontakt_details").show();
+				$("#orderby_value").hide();
 				$("#pagesize_selector").hide();
 				//alert(todoUri);
 			},
@@ -87,6 +89,7 @@ $(function() {
 			},
 		onOrderValueClicked: function() 
 			{	
+				alert("click");
 				$("#kontakt_liste").kontaktListe("reload");
 			},			
 		});

@@ -22,7 +22,6 @@
 		{	$(".birthday").datepicker({ dateFormat: 'dd.mm.yy' });
 		});
 	</script>
-	
   </head>
 
   <body> 
@@ -70,6 +69,7 @@
     </div>
 
 	<div id="kontakt_details" class="ui-widget">
+		<p>________________________________________________________________________</p>
 		<span class="detailfield">Name</span>		
 		<span class="nname detaildata">
 		</span>
@@ -230,18 +230,20 @@
         </table>
       </form>
     </div>
-	
+	<b>____________________________________________________________________________________________________</b>
 	<div id="pagesize_selector">
-		Seite:
+		<b>Seite:</b>
 		<span class="pagesize templatepage">
 			<span class="page actPage"></span>
 		</span>
 	</div>	
-		Sortierkriterium
-		<span id="orderby_value">
-			<input type="radio" name="orderby" value="cName" checked="checked">Name
-			<input type="radio" name="orderby" value="cCompany">Firma
+	
+	<div id="orderby_value">
+		<span>Sortierkriterium
+		<input type="radio" name="orderby" class="orderby_val" value="cName" checked="checked">Name
+		<input type="radio" name="orderby" class="orderby_val" value="cCompany">Firma
 		</span>
-	<b>____________________________________________________________________________________________________</b>
+	</div>
+	
   </body>
 </html>
