@@ -116,6 +116,22 @@ a:active {
   display: none;
 }
 
+.crtdata 
+{
+	color: gray;
+}
+.crtfield 
+{
+	color: gray;
+}
+.listfield 
+{
+	color: gray;
+}
+.detailfield 
+{
+	color: gray;
+}
 
 /*#menu_bar a {
   text-decoration: none;
