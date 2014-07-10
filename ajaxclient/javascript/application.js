@@ -84,7 +84,11 @@ $(function() {
 		onDownKontaktClicked: function() 
 			{	
 				$("#kontakt_liste").kontaktListe("reload",0,"DESC");
-			},			
+			},
+		// onOrderValueClicked: function() 
+			// {	
+				// $("#kontakt_liste").kontaktListe("reload");
+			// },			
 		});
 	
 	// Weitere Widgets instanziieren:
@@ -95,7 +99,6 @@ $(function() {
 		onPageClicked: function(event, pagenum)
 			{
 				$("#kontakt_liste").kontaktListe("reload",pagenum);
-				
 			},
 	
 	});

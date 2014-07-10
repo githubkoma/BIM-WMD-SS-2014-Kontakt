@@ -2,7 +2,7 @@ $.widget("kontakt.kontaktListe",
 {  
   // Javascript kennt kein private/public. Laut Programmierkonvention "soll" man
   // für private Eigenschaften mit einem _ Unterstrich beginnen
-  _load: function(pageSize=5,recFrom=0,sortOrder="ASC")
+  _load: function(pageSize,recFrom,sortOrder)
 	{	
 		$.ajax(
 		{
@@ -19,7 +19,7 @@ $.widget("kontakt.kontaktListe",
   	_create: function() 
     {	// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
 		var that=this;
-		this._load();
+		this._load(10,0,"ASC");
 			
 		this.element.find(".kontakt_sort_up").click(function()
 			{
@@ -32,6 +32,12 @@ $.widget("kontakt.kontaktListe",
 				that._trigger("onDownKontaktClicked");
 				return false; 
 			});	
+		
+		// this.element.find(".orderby_value").checked(function()
+			// {
+				// that._trigger("onOrderValueClicked");
+				// return false; 
+			// });		
 	},
   	
 	reload: function(pagenum,sortOrder)
@@ -46,13 +52,17 @@ $.widget("kontakt.kontaktListe",
 
 		if  (pagenum > 0)
 		{
-			recFrom = pagenum * 5 - 5;
-			pageSize = 5;
+			pageSize = 10;
+			recFrom = pagenum * pageSize - pageSize;
 		} else
 			{
 				recFrom = 0;
-				pageSize = 5;
+				pageSize = 10;
 			};		
+		
+		var test = this.element.find("#orderby").val();
+		alert(test);
+		
 		
 		this._load(pageSize,recFrom,sortOrder);
 	},
