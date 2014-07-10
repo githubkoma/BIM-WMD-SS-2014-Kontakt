@@ -95,7 +95,6 @@ $(function() {
 		onPageClicked: function(event, pagenum)
 			{
 				$("#kontakt_liste").kontaktListe("reload",pagenum);
-				
 			},
 	
 	});
