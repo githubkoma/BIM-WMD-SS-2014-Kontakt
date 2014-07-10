@@ -41,6 +41,7 @@ $(function() {
 			$("#kontakt_details").hide();
 			$("#pagesize_selector").show();
 			$("#orderby_value").show();
+			$("#sort_id").show();
 			$("#kontakt_liste").kontaktListe("reload");
 		},
 		onCreateKontaktClicked: function() {
@@ -62,6 +63,7 @@ $(function() {
 				$("#kontakt_details").show();
 				$("#orderby_value").hide();
 				$("#pagesize_selector").hide();
+				$("#sort_id").hide();
 				//alert(todoUri);
 			},
 			

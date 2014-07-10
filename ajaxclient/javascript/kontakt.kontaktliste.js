@@ -2,13 +2,13 @@ $.widget("kontakt.kontaktListe",
 {  
   // Javascript kennt kein private/public. Laut Programmierkonvention "soll" man
   // für private Eigenschaften mit einem _ Unterstrich beginnen
-  _load: function(pageSize,recFrom,sortOrder)
+  _load: function(pageSize,recFrom,sortOrder,orderBy)
 	{	
 		$.ajax(
 		{
 		   url: "/BIM-WMD-SS-2014-Kontakt/Service/Kontakte",
 		   dataType: "json",
-		   headers: {"RecordFrom": recFrom, "PageSize": pageSize, "OrderDir": sortOrder, "OderBy": "cNName"},
+		   headers: {"RecordFrom": recFrom, "PageSize": pageSize, "OrderDir": sortOrder, "OrderBy": orderBy},
 		   success: this._appendKontakte,
 		   complete: this._BuildPageNum,
 		   context: this,
@@ -19,7 +19,7 @@ $.widget("kontakt.kontaktListe",
   	_create: function() 
     {	// _ bedeutet Privat, diese Methode ist wie ein Konstruktor
 		var that=this;
-		this._load(10,0,"ASC");
+		this._load(10,0,"ASC","cNName");
 			
 		this.element.find(".kontakt_sort_up").click(function()
 			{
@@ -59,11 +59,17 @@ $.widget("kontakt.kontaktListe",
 				recFrom = 0;
 				pageSize = 10;
 			};		
+
+		// if  (this.element.find(".orderby_cCompany").checked = true)
+		// {
+			// orderBy = this.element.find(".orderby_cCompany").value;
+		// } else
+			// {
+				// orderBy = this.element.find(".orderby_cName").value;
+			// }
+		orderBy = "cNName";
 		
-		var test = this.element.find(".orderby").val();
-		alert(test);
-		
-		this._load(pageSize,recFrom,sortOrder);
+		this._load(pageSize,recFrom,sortOrder,orderBy);
 	},
    
 	_appendKontakte: function(kontakte) 

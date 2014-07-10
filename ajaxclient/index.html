@@ -33,15 +33,14 @@
 	  <a href="#"><img src="images/show_kontakte.png" width="150" alt="" class="show_kontakte"></a>
 	  <a href="#"><img src="images/create_kontakt.png" width="150" alt="" class="create_kontakt"></a>
     </div>  
-	<b>Kontakt-Liste</b>	
-		<div class="sort">  
+	<b>Kontakt-Liste</b>
+	<div id="kontakt_liste">	
+		<div class="sort" id="sort_id">  
 			<a href="#"><img src="images/ButtonUp.png" width="25" class="kontakt_sort_up"></a>
 			<a href="#"><img src="images/ButtonDown.png" width="25" class="kontakt_sort_down"></a>		
 			<span class="sortOrder">ASC</span>
 		</div>
-		<div id="kontakt_liste">	
 		<b>____________________________________________________________________________________________________</b>
-		
 		<!--Kontakt-Liste -->
 		<div class="kontakt template">
 
@@ -226,7 +225,6 @@
 			</td>
             <td><input id="crt_birthday_field" class="birthday" type="date" /></td>
           </tr>
-		  
         </table>
       </form>
     </div>
@@ -240,8 +238,8 @@
 	
 	<div id="orderby_value">
 		<span>Sortierkriterium
-		<input type="radio" name="orderby" class="orderby_val" value="cName" checked="checked">Name
-		<input type="radio" name="orderby" class="orderby_val" value="cCompany">Firma
+		<input type="radio" id="order_cName" name="orderby" value="cName" checked="checked">Name
+		<input type="radio" id="order_cCompany" name="orderby" value="cCompany">Firma
 		</span>
 	</div>
 	
