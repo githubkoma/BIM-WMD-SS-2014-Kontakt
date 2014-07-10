@@ -54,6 +54,10 @@ $.widget("kontakt.kontaktListe",
 		{
 			pageSize = 10;
 			recFrom = pagenum * pageSize - pageSize;
+<<<<<<< HEAD
+=======
+			
+>>>>>>> origin/master
 		} else
 			{
 				recFrom = 0;
