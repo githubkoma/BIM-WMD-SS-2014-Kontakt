@@ -43,6 +43,7 @@ $.widget("kontakt.kontaktListe",
 	reload: function(pagenum,sortOrder)
 	{
 		this.element.find(".kontakt:not(.template)").remove();	
+		this.element.find("#pagesize_selector").remove();		
 		
 		if  (sortOrder != "")
 		{
@@ -123,7 +124,7 @@ $.widget("kontakt.kontaktListe",
 	_BuildPageNum: function(response)
 	{
 		var that = this;
-
+		
 		pages = response.getResponseHeader('PageSize');
 		for (var i = 0; i < pages; i++) 
 		{
