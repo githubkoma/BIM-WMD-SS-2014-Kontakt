@@ -85,20 +85,17 @@
 					 header("HTTP/1.1 400");
 					
 					 $ErrMessage["nname"] = "Fehler in Eingabe: Nachname";
-					 //$ErrMessage = "Fehler in Nachname: " . $errCode;
 					 break;
 				
 				case ErrIds::cErrInputVName:
 					 header("HTTP/1.1 400");
 					 
 					 $ErrMessage["vname"] = "Fehler in Eingabe: Vorname";
-					 //$ErrMessage = "Fehler in Vorname: " . $errCode;
 					 break;
 				case ErrIds::cErrInputCompany:
 					 header("HTTP/1.1 400");
 					 
 					 $ErrMessage["company"] = "Fehler in Eingabe: Firma";
-					 $ErrMessage = "Fehler in Firma " . $errCode;
 					 break;
 				
 				default: 

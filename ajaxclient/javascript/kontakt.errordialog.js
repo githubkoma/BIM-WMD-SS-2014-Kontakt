@@ -1,4 +1,4 @@
-$.widget("todo.errorDialog", $.ui.dialog,
+$.widget("kontakt.errorDialog", $.ui.dialog,
 {  
   options: 
   {
