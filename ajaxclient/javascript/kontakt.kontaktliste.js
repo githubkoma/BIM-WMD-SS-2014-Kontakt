@@ -53,7 +53,7 @@ $.widget("kontakt.kontaktListe",
 
 		if  (pagenum > 0)
 		{
-			pageSize = 10;
+			var pageSize = 10;
 			recFrom = pagenum * pageSize - pageSize;
 		} else
 			{

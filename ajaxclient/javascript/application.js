@@ -17,6 +17,8 @@ $(function() {
 		{		
 			$("#kontakt_liste").show();
 			$("#kontakt_details").hide();
+			$("#titel_liste").show();
+			$("#titel_detail").hide();
 			$("#kontakt_liste").kontaktListe("reload");
 		}
 		
@@ -39,6 +41,8 @@ $(function() {
 		onShowKontakteClicked: function() {
 			$("#kontakt_liste").show();
 			$("#kontakt_details").hide();
+			$("#titel_detail").hide();
+			$("#titel_liste").show();
 			$("#pagesize_selector").show();
 			$("#orderby_value").show();
 			$("#sort_id").show();
@@ -46,7 +50,9 @@ $(function() {
 		},
 		onCreateKontaktClicked: function() {
 			$("#kontakt_liste").show();
+			$("#titel_liste").show();
 			$("#kontakt_details").hide();
+			$("#titel_detail").hide();
 			$("#create_dialog").createDialog("open");
 		},
 
@@ -60,6 +66,8 @@ $(function() {
 			{
 				$("#kontakt_details").kontaktDetails("load", kontaktUri);
 				$("#kontakt_liste").hide();
+				$("#titel_liste").hide();
+				$("#titel_detail").show();
 				$("#kontakt_details").show();
 				$("#orderby_value").hide();
 				$("#pagesize_selector").hide();
